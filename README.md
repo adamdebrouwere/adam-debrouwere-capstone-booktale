@@ -32,6 +32,7 @@ Travelers and used book enthusiasts alike. My initial idea for this app came fro
 HTML, scss, JavaScript, React, MySql, Express.
 
 Client side: react, react router, axios, html5-qrcode, qrcode-decoder-js, psql
+
 ServerSide: knex, uuid, qrcode, scrypt
 
 ### APIs
@@ -71,14 +72,19 @@ ServerSide: knex, uuid, qrcode, scrypt
 ### Endpoints
 
 GET books data from API
+
 GET user data, comment data, qrcode data, from server
+
 POST user data, comment data, qrcode data, from server
+
 PUT user data
 
 ## Roadmap
 
 Sprint 1 - qr code to comment section, db migrate and seed, log in UX for comments, create a BookTale
+
 Sprint 2 - connect to api to display book data, save users comments and books scanned, homepage and display books with new comments
+
 Sprint 3 -  style for all sizes - deploy
 
 ---
