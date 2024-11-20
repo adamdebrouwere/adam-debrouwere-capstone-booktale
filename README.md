@@ -47,21 +47,21 @@ ServerSide: knex, uuid, qrcode, scrypt
 
 ### Mockups
 ### Logos
-![](public.images/logos1.jpg)
-![](public.images/logos2.jpg)
+![](public/mockups/comments-login-signup.jpg)
+![](public/mockups//logos2.jpg)
 
 ### landing page
-![](public.images/Landing.jpg)
+![](public/mockups/Landing.jpg)
 
 ### homepage
-![](public.images/homepage.jpg)
+![](public/mockups/homepage.jpg)
 
 
 ### comments/login/signup
-![](public.images/comments-login-signup.jpg)
+![](public/mockups//comments-login-signup.jpg)
 
 ### tales/createTales
-![](public.images/tales-create.jpg)
+![](public/mockups//tales-create.jpg)
 
 
 ### Data
