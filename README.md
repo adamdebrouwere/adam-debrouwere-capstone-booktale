@@ -47,7 +47,7 @@ ServerSide: knex, uuid, qrcode, scrypt
 
 ### Mockups
 ### Logos
-![](public/mockups/comments-login-signup.jpg)
+![](public/mockups/logos1.jpg)
 ![](public/mockups//logos2.jpg)
 
 ### landing page
