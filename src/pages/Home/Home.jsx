@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useState, useEffect } from "react";
+import QrCodeGenerator from "../../components/QrCodeGenerator/QrCodeGenerator.jsx";
 
 function Home({BASE_URL}) {
   const [response, setResponse] = useState("");
@@ -8,17 +9,24 @@ function Home({BASE_URL}) {
   const fetchFromServer = async () => {
     try {
       const response = await axios.get(`${BASE_URL}`);
-      console.log(response.data)
-      setResponse(response);
+      setResponse(response.data);
     } catch (error) {
-      console.error("error fetching video data:", error);
+      console.error("error db data:", error);
     }
   };
 
   useEffect(() => {
     fetchFromServer();
   }, [])
-  return <div className="home">{response.data}</div>;
+  return (
+    <>
+    <div className="home">{response.message}</div>
+    <QrCodeGenerator />
+
+    </>
+    
+  )
+
 }
 
 export default Home;
