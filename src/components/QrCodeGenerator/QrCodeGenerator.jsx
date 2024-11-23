@@ -15,7 +15,7 @@ function QrCodeGenerator() {
   };
   return (
     <div>
-      <button onClick={() => generateQrCode('https://example.com')}>
+      <button onClick={() => generateQrCode('http://localhost:5173/')}>
         Generate QR Code
       </button>
       {qrCode && <img src={qrCode} alt="Generated QR Code" />}
