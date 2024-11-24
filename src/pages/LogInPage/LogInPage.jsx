@@ -2,13 +2,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function LogInPage() {
+function LogInPage({BASE_URL}) {
     const [loggedIn, setLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false); 
     const navigate = useNavigate();
-  
     // useEffect(() => {
     //   const token = localStorage.getItem("token");
     //     console.log(token)
@@ -47,17 +46,16 @@ function LogInPage() {
       const password = event.target.password.value;
         
       try {
-        const response = await axios.post("http://localhost:8080/login", {
+        const response = await axios.post(`${BASE_URL}/login`, {
           username: username,
           password: password,
         });
-        console.log(response.data.token, "trigger1")
   
         localStorage.setItem("token", response.data.token); 
         
   
         if (response.data.token) {
-          const userResponse = await axios.get("http://localhost:8080/user", {
+          const userResponse = await axios.get(`${BASE_URL}/user`, {
             headers: {
               Authorization: `Bearer ${response.data.token}`,
             },

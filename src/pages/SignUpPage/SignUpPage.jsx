@@ -1,39 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import axios from "axios";
 
-function SignUpPage() {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-//   const [error, setError] = useState(null);
+function SignUpPage({BASE_URL}) {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
 
-  const  handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const userData = { username, email, password };
-  
+
     try {
-      const response = await fetch('/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(userData),
-      });
+        const response = await axios.post(`${BASE_URL}/signup`, userData, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
   
-      const data = await response.json();
-  
-      if (response.ok) {
-        console.log('User created:', data);
-      } else {
-        console.error('Error:', data.error);
+        if (response.status === 201) {
+          setMessage('User created successfully!');
+        }
+      } catch (error) {
+        if (error.response) {
+          setError(error.response.data.error || 'An error occurred.');
+        } else {
+
+          setError('Network error. Please try again later.');
+        }
       }
-    } catch (error) {
-      console.error('Network error:', error);
-    }
   };
 
   return (
     <div>
       <h2>Sign Up</h2>
-      {error && <div style={{ color: 'red' }}>{error}</div>}
+      {error && <div style={{ color: "red" }}>{error}</div>}
 
       <form onSubmit={handleSubmit}>
         <div>

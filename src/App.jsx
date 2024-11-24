@@ -15,9 +15,9 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home BASE_URL={BASE_URL}/>} />
-        <Route path="/comments" element={<BookCommentPage />} />
-        <Route path="/login" element={<LogInPage />} />
-        <Route path="/signup" element={<SignUpPage/>} />
+        <Route path="/comments" element={<BookCommentPage BASE_URL={BASE_URL}/>} />
+        <Route path="/login" element={<LogInPage BASE_URL={BASE_URL}/>} />
+        <Route path="/signup" element={<SignUpPage BASE_URL={BASE_URL}/>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
