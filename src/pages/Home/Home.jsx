@@ -21,6 +21,7 @@ function Home({BASE_URL}) {
   // }, [])
   return (
     <div className="home">
+      <p>welcome home</p>
     <QrCodeGenerator />
 
     </div>
