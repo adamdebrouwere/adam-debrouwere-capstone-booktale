@@ -41,7 +41,7 @@ function Home({ BASE_URL }) {
       setIsLoading(false);
       setError("No token found. Please log in.");
     }
-  }, [BASE_URL]);
+  }, []);
 
   if (isLoading) {
     return <div>Loading...</div>;

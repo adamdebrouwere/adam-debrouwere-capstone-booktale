@@ -8,34 +8,6 @@ function LogInPage({BASE_URL}) {
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false); 
     const navigate = useNavigate();
-    // useEffect(() => {
-    //   const token = localStorage.getItem("token");
-    //     console.log(token)
-    //   if (token) {
-    //     const getUserData = async () => {
-    //       try {
-    //         const response = await axios.get("http://localhost:8080/user", {
-    //           headers: {
-    //             Authorization: `Bearer ${token}`, // send token as auth header
-    //           },
-    //         }); 
-    //         console.log(response.data)
-    //         setLoggedIn(true);
-    //         setUser(response.data.user);c
-    //         setIsLoading(false); // stop loading once data is fetched
-    //       } catch (error) {
-    //         const errorMessage =
-    //           error.response?.data?.message || "Error getting user data";
-    //         console.error(errorMessage);
-    //         setError(errorMessage);
-    //         setIsLoading(false); // stop loading on error
-    //       }
-    //     };
-    //     getUserData();
-    //   } else {
-    //     setIsLoading(false); // stop loading if no token is found
-    //   }
-    // }, []);
 
     const handleLogin = async (event) => {
       event.preventDefault();
@@ -66,7 +38,7 @@ function LogInPage({BASE_URL}) {
           setUser(userResponse.data.user);
           setError(""); 
           setIsLoading(false);
-          navigate("/"); 
+          navigate("/home"); 
         }
       } catch (error) {
         const errorMessage = error.response?.data?.message || "Error Logging in";
@@ -84,7 +56,7 @@ function LogInPage({BASE_URL}) {
   
 
     if (loggedIn) {
-        navigate('/');
+        navigate('/home');
       return <div>Taking you Home</div>; 
     }
 

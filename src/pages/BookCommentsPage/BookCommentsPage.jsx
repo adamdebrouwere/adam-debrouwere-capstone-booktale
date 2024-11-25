@@ -1,15 +1,15 @@
 import axios from 'axios';
 import CommentCreator from '../../components/CommentCreator/CommentCreator.jsx'
+import CommentDisplay from '../../components/CommentDisplay/CommentDisplay.jsx'
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 
-function BookCommentPage() {
+function BookCommentPage({BASE_URL}) {
     // const [book, setBook] = useState({});
   const [comments, setComments] = useState([]);
   const { bookId } = useParams();
-  const baseURL = import.meta.env.VITE_BASE_URL;
-  const API_KEY = import.meta.env.VITE_API_KEY;
+
 
   // useEffect(() => {
   //   const getBookById = async (id) => {
@@ -27,7 +27,7 @@ function BookCommentPage() {
       try {
         if (id) {
           const response = await axios.get(
-            `${baseURL}/books/${id}/comments?api_key=${API_KEY}`
+            `${BASE_URL}/books/${id}/comments`
           );
 
           setComments(response.data)
@@ -69,7 +69,7 @@ function handleCommentPost (e, commentor, comment) {
     <div className="book-container">
       {/* <BookDescription book={book} /> */}
       <CommentCreator handleCommentPost={handleCommentPost} />
-      {/* <CommentDisplay comments={comments} /> */}
+      <CommentDisplay comments={comments} />
     </div>
   );
   
