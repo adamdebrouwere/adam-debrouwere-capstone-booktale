@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+import { useAuthentication } from "../../components/AuthenticationContext/AuthenticationContext";
+
 function LogInPage({BASE_URL}) {
     const [loggedIn, setLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
@@ -32,7 +34,6 @@ function LogInPage({BASE_URL}) {
               Authorization: `Bearer ${response.data.token}`,
             },
           });
-          console.log(userResponse, "trigger2");
   
           setLoggedIn(true);
           setUser(userResponse.data.user);
@@ -54,12 +55,6 @@ function LogInPage({BASE_URL}) {
       return <div>Loading...</div>;
     }
   
-
-    if (loggedIn) {
-        navigate('/home');
-      return <div>Taking you Home</div>; 
-    }
-
   return (
     <div className="LogInPage">
       {!loggedIn && (

@@ -1,12 +1,14 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import QrCodeGenerator from "../../components/QrCodeGenerator/QrCodeGenerator.jsx";
+import { useNavigate } from "react-router-dom";
 
 function Home({ BASE_URL }) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -22,7 +24,6 @@ function Home({ BASE_URL }) {
             },
           });
 
-          console.log(response.data);
           setLoggedIn(true);
           setUser(response.data.user);
           setError("");
@@ -40,8 +41,9 @@ function Home({ BASE_URL }) {
     } else {
       setIsLoading(false);
       setError("No token found. Please log in.");
+      navigate('/login')
     }
-  }, []);
+  }, [BASE_URL, navigate]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -57,7 +59,7 @@ function Home({ BASE_URL }) {
   return (
     <div className="home">
       <p>{`welcome home ${user.username}`}</p>
-      <QrCodeGenerator />
+      <button onClick={() => navigate('/create-booktale')}>CREATE A Booktale</button>
     </div>
   );
 }
