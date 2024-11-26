@@ -14,8 +14,8 @@ function Landing() {
   }
   return (
     <div>
-      <h1>Welcome to Reader Tales</h1>
-      <p>the online platform that allows you to connect with the past and future readers of this.</p>
+      <h1>Welcome to Booktale</h1>
+      <p>The online platform that allows you to connect with the past and future readers of used books.</p>
       <div>
         <button onClick={handleLogin}>Log In</button>
         <button onClick={handleSignUp}>Sign Up</button>

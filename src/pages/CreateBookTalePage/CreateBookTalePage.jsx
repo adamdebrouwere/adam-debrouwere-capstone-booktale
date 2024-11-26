@@ -61,7 +61,7 @@ const CreateBookTalePage = ({ BASE_URL }) => {
       return;
     }
 
-    const token = localStorage.getItem("authToken");
+    const token = localStorage.getItem("token");
 
     if (!token) {
       alert("You must be logged in to create a Booktale");
@@ -84,12 +84,11 @@ const CreateBookTalePage = ({ BASE_URL }) => {
           },
         }
       );
-      
+
       console.log(response.data, "trigger");
       alert("Booktale successfully created.");
-      navigate(`/${qrCodeId}`);
     } catch (error) {
-      setError("Error posting book and qr code data.");
+      setError("error posting book and qr code data.");
       console.error("error posting book and qr code data", error);
     }
   };

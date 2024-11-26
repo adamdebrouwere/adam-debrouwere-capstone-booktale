@@ -7,7 +7,7 @@ function CommentSection({ qrToken }) {
   const [success, setSuccess] = useState('');
 
   const handleSubmit = async () => {
-    const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem('token');
     if (!token) {
       setError('you must be logged in to comment');
       return;
