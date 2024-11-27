@@ -2,13 +2,13 @@
 import { DateTime } from "luxon";
 
 function CommentDisplay({ comments }) {
-  function timestampReformat(time) {
-    const newTimestamp = DateTime.fromMillis(time);
-    return newTimestamp.toRelative();
-  }
-  
+  console.log(comments)
   if (!comments) {
-    return console.error("no video selected:", error);
+    return console.error("no comments found:");
+  }
+
+  if (comments === undefined) {
+    comments = [];
   }
 
   return (
@@ -22,10 +22,8 @@ function CommentDisplay({ comments }) {
           </div>
           <div className="comment__right">
             <div className="comment__right-top">
-              <p className="comment__commentor">{comment.name}</p>
-              <p className="comment__timestamp">
-                {timestampReformat(comment.timestamp)}
-              </p>
+              <p className="comment__commentor">{comment.user_id}</p>
+              <p className="comment__timestamp">{comment.created_at}</p>
             </div>
             <div className="comment__right-bottom">
               <p className="comment__comment">{comment.comment}</p>

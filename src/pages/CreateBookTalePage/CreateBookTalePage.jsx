@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import BookInfoDisplay from "../../components/BookInfoDisplay/BookInfoDisplay.jsx";
 import BookSearch from "../../components/BookSearch/BookSearch.jsx";
 import CreateQrCode from "../../components/CreateQrCode/CreateQrCode.jsx";
+
+
 
 const CreateBookTalePage = ({ BASE_URL }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -12,6 +15,8 @@ const CreateBookTalePage = ({ BASE_URL }) => {
   const [qrCodeId, setQrCodeId] = useState("");
   const [qrCodeUrl, setQrCodeUrl] = useState("");
 
+  const navigate = useNavigate()
+  
   const fetchBookInfo = async () => {
     if (!searchQuery) {
       alert("Search Query Empty");
@@ -35,7 +40,7 @@ const CreateBookTalePage = ({ BASE_URL }) => {
       if (bookData) {
         const bookDetails = {
           title: bookData.title,
-          author: bookData.author_name ? bookData.author_name : "N/A",
+          author: bookData.author_name ? bookData.author_name[0] : "N/A",
           first_sentence: bookData.first_sentence,
           publish_date: bookData.first_publish_year,
           cover_url: bookData.cover_i
@@ -85,8 +90,8 @@ const CreateBookTalePage = ({ BASE_URL }) => {
         }
       );
 
-      console.log(response.data, "trigger");
       alert("Booktale successfully created.");
+      navigate(`/booktale/${qrCodeId}`)
     } catch (error) {
       setError("error posting book and qr code data.");
       console.error("error posting book and qr code data", error);

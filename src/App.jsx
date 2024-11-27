@@ -27,10 +27,6 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route
-            path="/comments"
-            element={<BookCommentPage BASE_URL={BASE_URL} />}
-          />
           <Route path="/login" element={<LogInPage BASE_URL={BASE_URL} />} />
           <Route path="/signup" element={<SignUpPage BASE_URL={BASE_URL} />} />
           <Route
@@ -39,6 +35,12 @@ function App() {
               <ProtectedRoute>
                 <CreateBookTalePage BASE_URL={BASE_URL} />
               </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/booktale/:qrCodeId"
+            element={
+                <BookCommentPage BASE_URL={BASE_URL}/>
             }
           />
           <Route path="*" element={<NotFound />} />

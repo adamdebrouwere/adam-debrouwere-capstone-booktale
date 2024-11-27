@@ -20,7 +20,7 @@ function CreateQrCode({ qrCodeUrl, setQrCodeUrl, qrCodeId, setQrCodeId }) {
 
   useEffect(() => {
     if (qrCodeId) {
-      generateQrCode(`http://localhost:5173/books/comments/${qrCodeId}`)
+      generateQrCode(`http://localhost:5173/comments/${qrCodeId}`)
     }
   }, [qrCodeId])
 

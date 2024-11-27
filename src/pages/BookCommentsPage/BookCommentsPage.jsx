@@ -10,18 +10,8 @@ function BookCommentPage({ BASE_URL }) {
   const [error, setError] = useState("");
   const [comment, setComment] = useState("");
   const [user, setUser] = useState(null);
-  const { bookId } = useParams();
+  const { qrCodeId } = useParams();
 
-  // useEffect(() => {
-  //   const getBookById = async (id) => {
-  //     const response = await axios.get(
-  //       `${baseURL}/books/${id}?api_key=${API_KEY}`
-  //     );
-  //     setBook(response.data);
-  //   };
-
-  //   getBookById(bookId);
-  // }, [bookId]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -46,12 +36,16 @@ function BookCommentPage({ BASE_URL }) {
     }
   }, [BASE_URL]);
 
-  useEffect(() => {
+  
     async function getComments(id) {
       try {
         if (id) {
-          const response = await axios.get(`${BASE_URL}/books/${id}/comments`);
-          setComments(response.data);
+          const response = await axios.get(`${BASE_URL}/booktale/${id}`);
+
+          setComments(response.data.comments);
+        } else {
+          setComments([])
+          console.lerror("Can't get comments", error)
         }
       } catch (error) {
         setError("Can't fetch comments. Please try again later.");
@@ -61,8 +55,9 @@ function BookCommentPage({ BASE_URL }) {
       }
     }
 
-    getComments(bookId);
-  }, [bookId, BASE_URL]);
+  useEffect(() => {  
+    getComments(qrCodeId);
+  }, [qrCodeId, BASE_URL]);
   
   async function postComment(id, newComment) {
     try {
@@ -72,16 +67,24 @@ function BookCommentPage({ BASE_URL }) {
         return;
       }
 
-      const response = await axios.post(
-        `${BASE_URL}/comments/${id}`,
-        newComment,
+      if (comments.some(userComment => userComment.user_id === user.id
+      )) {
+        alert("You have already commented. Scan another qr or create your own!")
+        return
+      }
+
+      await axios.post(
+        `${BASE_URL}/booktale/${id}`,
+       { comment: newComment },
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-      setComments((prevComments) => [...prevComments, response.data]);
+      
+      
+      getComments(id);
       setComment("");
     } catch (error) {
       console.error("Error posting comment:", error);
@@ -89,38 +92,27 @@ function BookCommentPage({ BASE_URL }) {
     }
   }
 
-  function handleCommentPost(event) {
-    event.preventDefault();
-
-    if (!comment) {
-      alert("Please enter a comment.");
+  const handleSubmitComment = async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setError("you must be logged in to comment");
       return;
     }
 
-    if (!user) {
-      alert("You must be logged in to post a comment.");
-      return;
-    }
-
-    const newComment = {
-      name: user.username,
-      comment: comment,
-    };
-
-    postComment(bookId, newComment);
-  }
+    postComment(qrCodeId, comment)
+  };
 
   if (isLoading) {
     return <p>Loading...</p>
   }
 
   
-
   return (
     <div className="">
       {/* <BookDescription book={book} /> */}
-      <CommentCreator handleCommentPost={handleCommentPost} comment={comment} setComment={setComment}/>
-      <CommentDisplay comments={comments} />
+      <CommentCreator handleSubmitComment={handleSubmitComment} setComment={setComment} id={qrCodeId} BASE_URL={BASE_URL}/>
+      <CommentDisplay comments={comments} BASE_URL={BASE_URL} />
     </div>
   );
 }

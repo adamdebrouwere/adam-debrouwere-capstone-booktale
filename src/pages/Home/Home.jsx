@@ -12,7 +12,6 @@ function Home({ BASE_URL }) {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log("Token:", token);
 
     if (token) {
       const getUserData = async () => {
