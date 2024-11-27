@@ -82,6 +82,7 @@ function LogInPage({BASE_URL}) {
             <button className="form__btn" type="submit">
               Login
             </button>
+            <button className="form__btn" type="submit" onClick={()=> navigate('/signup')}>Sign Up</button>
             {error && <p>{error}</p>}
           </form>
         </div>

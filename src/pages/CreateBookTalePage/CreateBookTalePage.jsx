@@ -73,12 +73,13 @@ const CreateBookTalePage = ({ BASE_URL }) => {
     }
 
     try {
-      const { title, author, cover_url } = bookInfo;
+      const { title, author, publish_date, cover_url } = bookInfo;
       const response = await axios.post(
         `${BASE_URL}/booktale`,
         {
           title,
           author,
+          publishDate: publish_date,
           coverUrl: cover_url,
           qrCodeId,
           qrCodeUrl,
