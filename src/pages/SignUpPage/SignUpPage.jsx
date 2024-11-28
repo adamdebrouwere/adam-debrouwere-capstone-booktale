@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import Cookies from 'js-cookie' 
 
 function SignUpPage({ BASE_URL }) {
   const [username, setUsername] = useState("");
@@ -9,8 +10,9 @@ function SignUpPage({ BASE_URL }) {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-
   const navigate = useNavigate();
+  const location = useLocation();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -19,27 +21,57 @@ function SignUpPage({ BASE_URL }) {
 
     const userData = { username, email, password };
 
-    if (password === confirmPassword) {
-      try {
-        const response = await axios.post(`${BASE_URL}/signup`, userData, {
-          headers: {
-            "Content-Type": "application/json",
-          },
+    if (!username || !email || !password || !confirmPassword) {
+      setError("All fields are required.");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError("Passwords must match.");
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters long.");
+      return;
+    }
+
+    try {
+      const response = await axios.post(`${BASE_URL}/signup`, userData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.status === 201) {
+        alert("User created successfully!");
+
+        const loginResponse = await axios.post(`${BASE_URL}/login`, {
+          username: userData.username,
+          password: userData.password,
         });
 
-        if (response.status === 201) {
-          alert("User created successfully!");
-          navigate("/login");
-        }
-      } catch (error) {
-        if (error.response) {
-          setError(error.response.data.error || "An error occurred.");
-        } else {
-          setError("Network error. Please try again later.");
+        if (loginResponse.data.token) {
+          Cookies.set("token", response.data.token, { expires: 7, secure: true, sameSite: "Strict"});
+
+          const from  = location.state?.from || "/home"
+          navigate(from);
         }
       }
-    } else {
-      setError("Passwords must match");
+
+      
+    } catch (error) {
+      if (error.response) {
+        setError(error.response.data.error || "An error occurred.");
+      } else {
+        setError("Network error. Please try again later.");
+      }
     }
   };
 

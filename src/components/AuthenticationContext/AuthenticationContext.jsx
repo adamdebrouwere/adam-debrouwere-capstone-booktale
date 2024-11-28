@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const AuthenticationContext = createContext();
 
@@ -7,13 +8,13 @@ export const useAuthentication = () => useContext(AuthenticationContext);
 
 export const AuthenticationProvider = ({ children, BASE_URL }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    const token = localStorage.getItem("token");
+    const token = Cookies.get("token");
     return token ? true : false;
   });
 
   useEffect(() => {
     const authCheck = async () => {
-      const token = localStorage.getItem("token");
+      const token = Cookies.get("token");
       if (token) {
         try {
           const response = await axios.get(`${BASE_URL}/authenticated`, {

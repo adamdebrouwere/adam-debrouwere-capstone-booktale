@@ -3,7 +3,7 @@ import CommentCreator from "../../components/CommentCreator/CommentCreator.jsx";
 import CommentDisplay from "../../components/CommentDisplay/CommentDisplay.jsx";
 import BookInfoDisplay from "../../components/BookInfoDisplay/BookInfoDisplay.jsx";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { XMLParser } from "fast-xml-parser";
 
 function BookCommentPage({ BASE_URL }) {
@@ -14,6 +14,10 @@ function BookCommentPage({ BASE_URL }) {
   const [comment, setComment] = useState("");
   const [user, setUser] = useState(null);
   const { qrCodeId } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from || "/";
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -180,12 +184,15 @@ function BookCommentPage({ BASE_URL }) {
   return (
     <div className="">
       <BookInfoDisplay bookInfo={bookInfo} />
-      <CommentCreator
+      {user ? (<CommentCreator
         handleSubmitComment={handleSubmitComment}
         setComment={setComment}
         id={qrCodeId}
         BASE_URL={BASE_URL}
-      />
+      />) : <div>
+        <button onClick={() => navigate("/login", {state: { from }})}>Log In</button>
+        <button onClick={() => navigate("/signup", {state: { from }})}>Signup</button>
+        </div>}
       <CommentDisplay comments={comments} BASE_URL={BASE_URL} />
     </div>
   );
