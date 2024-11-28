@@ -13,9 +13,9 @@ import CreateBookTalePage from "./pages/CreateBookTalePage/CreateBookTalePage.js
 
 function App() {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
-
+//empty dependecy array use effect , in the useEffect, get local storage token if exists, if not then see log in, send to back end if exists
   return (
-    <AuthenticationProvider>
+    <AuthenticationProvider BASE_URL={BASE_URL}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Landing />} />
