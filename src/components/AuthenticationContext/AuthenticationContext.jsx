@@ -7,7 +7,9 @@ const AuthenticationContext = createContext({
   user: null,
   login: () => {},
   logout: () => {},
+  setLoading: () => {},
   loading: false,
+  setError: () => {},
   error: null,
   BASE_URL: "",
 });
@@ -26,7 +28,7 @@ export const AuthenticationProvider = ({ children }) => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const BASE_URL = import.meta.env.VITE_BASE_URL;
-  console.log({ user: user, authenticated: authenticated, error: error });
+  console.log({ user: user, authenticated: authenticated, error: error, loading: loading });
 
   useEffect(() => {
     const token = Cookies.get("token");

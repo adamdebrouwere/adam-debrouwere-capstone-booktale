@@ -6,8 +6,7 @@ import { useAuthentication } from "../../components/AuthenticationContext/Authen
 
 function Home() {
   const { loading, error, BASE_URL, user } = useAuthentication()
-  // const [ user, setUser ] = useState("");
-  console.log(user)
+  console.log(loading)
   
   
   // const [error, setError] = useState("");

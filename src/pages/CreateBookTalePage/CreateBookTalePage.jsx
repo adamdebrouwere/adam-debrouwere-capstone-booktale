@@ -15,7 +15,7 @@ const CreateBookTalePage = () => {
   // const [error, setError] = useState("");
   const [qrCodeId, setQrCodeId] = useState("");
   const [qrCodeUrl, setQrCodeUrl] = useState("");
-  const { BASE_URL, error, loading } = useAuthentication()
+  const { BASE_URL, error, loading, setError, setLoading } = useAuthentication()
 
   const navigate = useNavigate()
   
@@ -55,10 +55,10 @@ const CreateBookTalePage = () => {
         // error("No books found.");
       }
     } catch (error) {
-      error("Error fetching book data.");
+      setError("Error fetching book data.");
       console.error(error);
     } finally {
-      // loading(false);
+      setLoading(false);
     }
   };
 

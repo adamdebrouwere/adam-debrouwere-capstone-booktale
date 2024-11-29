@@ -14,7 +14,7 @@ function BookCommentPage() {
   const [comment, setComment] = useState("");
   const { qrCodeId } = useParams();
 
-  const { BASE_URL, user, error, setError, loading } = useAuthentication()
+  const { BASE_URL, user, error, setError, loading, setLoading } = useAuthentication()
   
   const navigate = useNavigate();
   const location = useLocation();
@@ -34,16 +34,16 @@ function BookCommentPage() {
 
           setUser(response.data.user);
         } catch (error) {
-          // setError(`Error fetching user data${error}`);
+          setError(`Error fetching user data${error}`);
         } finally {
-          // setLoading(false);
+          setLoading(false);
         }
       };
 
       getUserData();
     } else {
-      // setLoading(false);
-      // setError("No token found. Please log in.");
+      setLoading(false);
+      setError("No token found. Please log in.");
     }
   }, [BASE_URL]);
 
@@ -181,9 +181,9 @@ function BookCommentPage() {
     postComment(qrCodeId, comment);
   };
 
-  // if (loading) {
-  //   return <p>Loading...</p>;
-  // }
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div className="">
