@@ -5,22 +5,24 @@ import BookInfoDisplay from "../../components/BookInfoDisplay/BookInfoDisplay.js
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { XMLParser } from "fast-xml-parser";
+import Cookies from "js-cookie";
+import { useAuthentication } from "../../components/AuthenticationContext/AuthenticationContext.jsx";
 
-function BookCommentPage({ BASE_URL }) {
+function BookCommentPage() {
   const [comments, setComments] = useState([]);
   const [bookInfo, setBookInfo] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState("");
   const [comment, setComment] = useState("");
-  const [user, setUser] = useState(null);
   const { qrCodeId } = useParams();
+
+  const { BASE_URL, user, error, setError, loading } = useAuthentication()
+  
   const navigate = useNavigate();
   const location = useLocation();
+  const from = location.state?.from || `/booktale/${qrCodeId}`;
 
-  const from = location.state?.from || "/";
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = Cookies.get("token");
     if (token) {
       const getUserData = async () => {
         try {
@@ -29,17 +31,19 @@ function BookCommentPage({ BASE_URL }) {
               Authorization: `Bearer ${token}`,
             },
           });
+
           setUser(response.data.user);
         } catch (error) {
-          setError("Error fetching user data.");
+          // setError(`Error fetching user data${error}`);
         } finally {
-          setIsLoading(false);
+          // setLoading(false);
         }
       };
+
       getUserData();
     } else {
-      setIsLoading(false);
-      setError("No token found. Please log in.");
+      // setLoading(false);
+      // setError("No token found. Please log in.");
     }
   }, [BASE_URL]);
 
@@ -57,14 +61,14 @@ function BookCommentPage({ BASE_URL }) {
       setError("Can't fetch comments. Please try again later.");
       console.error(error);
     } finally {
-      setIsLoading(false);
+      // setLoading(false);
     }
   }
   useEffect(() => {
     getComments(qrCodeId);
   }, [qrCodeId, BASE_URL]);
 
-  async function getBookInfo(id) {
+  async function getBookInfo() {
     try {
       const response = await axios.get(`${BASE_URL}/bookInfo/${qrCodeId}`);
       setBookInfo(response.data.getBookInfo);
@@ -78,7 +82,7 @@ function BookCommentPage({ BASE_URL }) {
 
   async function postComment(id, newComment) {
     try {
-      const token = localStorage.getItem("token");
+      const token = Cookies.get("token");
       if (!token) {
         alert("You must be logged in to post a comment.");
         return;
@@ -168,7 +172,7 @@ function BookCommentPage({ BASE_URL }) {
 
   const handleSubmitComment = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("token");
+    const token = Cookies.get("token");
     if (!token) {
       setError("You must be logged in to comment");
       return;
@@ -177,9 +181,9 @@ function BookCommentPage({ BASE_URL }) {
     postComment(qrCodeId, comment);
   };
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
+  // if (loading) {
+  //   return <p>Loading...</p>;
+  // }
 
   return (
     <div className="">
@@ -188,7 +192,6 @@ function BookCommentPage({ BASE_URL }) {
         handleSubmitComment={handleSubmitComment}
         setComment={setComment}
         id={qrCodeId}
-        BASE_URL={BASE_URL}
       />) : <div>
         <button onClick={() => navigate("/login", {state: { from }})}>Log In</button>
         <button onClick={() => navigate("/signup", {state: { from }})}>Signup</button>

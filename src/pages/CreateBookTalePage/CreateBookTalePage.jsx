@@ -4,16 +4,18 @@ import { useNavigate } from "react-router-dom";
 import BookInfoDisplay from "../../components/BookInfoDisplay/BookInfoDisplay.jsx";
 import BookSearch from "../../components/BookSearch/BookSearch.jsx";
 import CreateQrCode from "../../components/CreateQrCode/CreateQrCode.jsx";
+import Cookies from "js-cookie"
+import { useAuthentication } from "../../components/AuthenticationContext/AuthenticationContext.jsx";
 
 
-
-const CreateBookTalePage = ({ BASE_URL }) => {
+const CreateBookTalePage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [bookInfo, setBookInfo] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  // const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState("");
   const [qrCodeId, setQrCodeId] = useState("");
   const [qrCodeUrl, setQrCodeUrl] = useState("");
+  const { BASE_URL, error, loading } = useAuthentication()
 
   const navigate = useNavigate()
   
@@ -23,8 +25,8 @@ const CreateBookTalePage = ({ BASE_URL }) => {
       return;
     }
 
-    setLoading(true);
-    setError("");
+    // loading(true);
+    // error("");
     setBookInfo(null);
 
     try {
@@ -50,13 +52,13 @@ const CreateBookTalePage = ({ BASE_URL }) => {
 
         setBookInfo(bookDetails);
       } else {
-        setError("No books found.");
+        // error("No books found.");
       }
     } catch (error) {
-      setError("Error fetching book data.");
+      error("Error fetching book data.");
       console.error(error);
     } finally {
-      setLoading(false);
+      // loading(false);
     }
   };
 
@@ -66,7 +68,7 @@ const CreateBookTalePage = ({ BASE_URL }) => {
       return;
     }
 
-    const token = localStorage.getItem("token");
+    const token = Cookies.get("token");
 
     if (!token) {
       alert("You must be logged in to create a Booktale");
@@ -106,7 +108,7 @@ const CreateBookTalePage = ({ BASE_URL }) => {
         setSearchQuery={setSearchQuery}
         fetchBookInfo={fetchBookInfo}
       />
-      {loading && <p>Loading...</p>}
+      {/* {loading && <p>Loading...</p>} */}
 
       {error && <p>{error}</p>}
 

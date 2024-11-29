@@ -2,22 +2,24 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import Cookies from 'js-cookie' 
+import { useAuthentication } from "../../components/AuthenticationContext/AuthenticationContext";
 
-function SignUpPage({ BASE_URL }) {
+function SignUpPage() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
+  // const [message, setMessage] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
+  const { BASE_URL, login } = useAuthentication()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     setError("");
-    setMessage("");
+    // setMessage("");
 
     const userData = { username, email, password };
 
@@ -52,17 +54,19 @@ function SignUpPage({ BASE_URL }) {
       if (response.status === 201) {
         alert("User created successfully!");
 
-        const loginResponse = await axios.post(`${BASE_URL}/login`, {
-          username: userData.username,
-          password: userData.password,
-        });
-
-        if (loginResponse.data.token) {
-          Cookies.set("token", response.data.token, { expires: 7, secure: true, sameSite: "Strict"});
-
-          const from  = location.state?.from || "/home"
-          navigate(from);
+        try {
+          await login(username, password);
+        
+          if (!error) {
+            const from  = location.state?.from || "/home"
+            navigate(from, {replace: true});
+          }
+        } catch (error) {
+          console.error("Login error:", error)
         }
+
+          
+        
       }
 
       
@@ -78,9 +82,6 @@ function SignUpPage({ BASE_URL }) {
   return (
     <div>
       <h2>Sign Up</h2>
-      {error && <div style={{ color: "red" }}>{error}</div>}
-      {message && <div style={{ color: "green" }}>{message}</div>}
-
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">Username: </label>
