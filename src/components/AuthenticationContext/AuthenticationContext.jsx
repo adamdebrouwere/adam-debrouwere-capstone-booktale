@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 
 const AuthenticationContext = createContext({
   authenticated: false,
+  setUser: () => {},
   user: null,
   login: () => {},
   logout: () => {},
@@ -12,6 +13,7 @@ const AuthenticationContext = createContext({
   setError: () => {},
   error: null,
   BASE_URL: "",
+  token: "",
 });
 
 export const useAuthentication = () => {
@@ -19,20 +21,14 @@ export const useAuthentication = () => {
 };
 
 export const AuthenticationProvider = ({ children }) => {
-  // const [isAuthenticated, setIsAuthenticated] = useState(() => {
-  //   const token = Cookies.get("token");
-  //   return token ? true : false;
-  // });
   const [authenticated, setAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const BASE_URL = import.meta.env.VITE_BASE_URL;
-  console.log({ user: user, authenticated: authenticated, error: error, loading: loading });
+  const token = Cookies.get("token");
 
   useEffect(() => {
-    const token = Cookies.get("token");
-
     if (token) {
       const authCheck = async () => {
         setLoading(true);
@@ -71,7 +67,6 @@ export const AuthenticationProvider = ({ children }) => {
   }, [BASE_URL]);
 
   const login = async (username, password) => {
-    console.log("called")
     try {
       setLoading(true); 
       const response = await axios.post(`${BASE_URL}/login`, {
@@ -112,7 +107,7 @@ export const AuthenticationProvider = ({ children }) => {
 
   return (
     <AuthenticationContext.Provider
-      value={{ authenticated, user, login, logout, loading, error, BASE_URL }}
+      value={{ authenticated, user, setUser, login, logout, loading, setLoading, error, setError, BASE_URL, token }}
     >
       {children}
     </AuthenticationContext.Provider>

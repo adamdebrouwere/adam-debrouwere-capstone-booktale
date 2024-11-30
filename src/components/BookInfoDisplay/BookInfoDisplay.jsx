@@ -1,6 +1,13 @@
 import React from 'react'
+import { useAuthentication } from '../AuthenticationContext/AuthenticationContext'
 
 function BookInfoDisplay({bookInfo}) {
+  const { loading } = useAuthentication();
+
+  if(loading) {
+    return <div>Loading...</div>
+  }
+  
   return (
     <div>{bookInfo && (
         <div>
@@ -10,7 +17,7 @@ function BookInfoDisplay({bookInfo}) {
           
           <p><strong>Published Year:</strong> {bookInfo.publish_date}</p>
           {bookInfo.cover_url && (
-            <img src={bookInfo.cover_url} alt={bookInfo.title} />
+            <img height="200" src={bookInfo.cover_url} alt={bookInfo.title} />
           )}
         </div>
       )}</div>

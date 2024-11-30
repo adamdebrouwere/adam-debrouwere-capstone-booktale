@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
-import Cookies from 'js-cookie' 
 import { useAuthentication } from "../../components/AuthenticationContext/AuthenticationContext";
 
 function SignUpPage() {
@@ -9,17 +8,16 @@ function SignUpPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState("");
-  // const [message, setMessage] = useState("");
+  
   const navigate = useNavigate();
   const location = useLocation();
-  const { BASE_URL, login } = useAuthentication()
+  
+  const { BASE_URL, login, error, setError } = useAuthentication()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     setError("");
-    // setMessage("");
 
     const userData = { username, email, password };
 

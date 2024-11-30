@@ -14,7 +14,7 @@ function BookCommentPage() {
   const [comment, setComment] = useState("");
   const { qrCodeId } = useParams();
 
-  const { BASE_URL, user, error, setError, loading, setLoading } = useAuthentication()
+  const { BASE_URL, setUser, user, error, setError, loading, setLoading, token } = useAuthentication()
   
   const navigate = useNavigate();
   const location = useLocation();
@@ -22,7 +22,6 @@ function BookCommentPage() {
 
 
   useEffect(() => {
-    const token = Cookies.get("token");
     if (token) {
       const getUserData = async () => {
         try {
@@ -34,7 +33,7 @@ function BookCommentPage() {
 
           setUser(response.data.user);
         } catch (error) {
-          setError(`Error fetching user data${error}`);
+          setError(`Error fetching user data: ${error}`);
         } finally {
           setLoading(false);
         }
@@ -43,7 +42,6 @@ function BookCommentPage() {
       getUserData();
     } else {
       setLoading(false);
-      setError("No token found. Please log in.");
     }
   }, [BASE_URL]);
 
@@ -61,7 +59,7 @@ function BookCommentPage() {
       setError("Can't fetch comments. Please try again later.");
       console.error(error);
     } finally {
-      // setLoading(false);
+      setLoading(false);
     }
   }
   useEffect(() => {
@@ -109,7 +107,7 @@ function BookCommentPage() {
       //       },
       //     }
       //   );
-      // } else
+      // } 
 
       const position = await new Promise((resolve, reject) => {
         if (navigator.geolocation) {

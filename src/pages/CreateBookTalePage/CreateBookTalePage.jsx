@@ -11,8 +11,6 @@ import { useAuthentication } from "../../components/AuthenticationContext/Authen
 const CreateBookTalePage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [bookInfo, setBookInfo] = useState(null);
-  // const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState("");
   const [qrCodeId, setQrCodeId] = useState("");
   const [qrCodeUrl, setQrCodeUrl] = useState("");
   const { BASE_URL, error, loading, setError, setLoading } = useAuthentication()
@@ -25,8 +23,8 @@ const CreateBookTalePage = () => {
       return;
     }
 
-    // loading(true);
-    // error("");
+    setLoading(true);
+    setError("");
     setBookInfo(null);
 
     try {
@@ -52,7 +50,7 @@ const CreateBookTalePage = () => {
 
         setBookInfo(bookDetails);
       } else {
-        // error("No books found.");
+        setError("No books found.");
       }
     } catch (error) {
       setError("Error fetching book data.");
@@ -100,6 +98,10 @@ const CreateBookTalePage = () => {
       console.error("error posting book and qr code data", error);
     }
   };
+
+  // if (loading) {
+  //   return <div>Loading...</div>
+  // }
 
   return (
     <div>

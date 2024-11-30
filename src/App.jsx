@@ -15,52 +15,6 @@ import Landing from "./pages/Landing/Landing.jsx";
 import CreateBookTalePage from "./pages/CreateBookTalePage/CreateBookTalePage.jsx";
 
 function App() {
-  // const [user, setUser] = useState({});
-  // const [error, setError] = useState("");
-  // const [loading, setLoading] = useState(false);
-  const { authenticated, user, loading, error } = useAuthentication();
-
-  // const BASE_URL = import.meta.env.VITE_BASE_URL;
-
-
-  useEffect(() => {
-    console.log(
-      
-      
-      
-      {authenticated});
-  }, [authenticated])
-
-  
-  // useEffect(() => {
-  //   const token = Cookies.get("token");
-
-  //   if (token) {
-  //     const getUserData = async () => {
-  //       try {
-  //         setLoading(true);
-  //         const response = await axios.get(`${BASE_URL}/user`, {
-  //           headers: {
-  //             Authorization: `Bearer ${token}`,
-  //           },
-  //         });
-
-  //         setUser(response.data.user);
-  //         setError("");
-  //       } catch (error) {
-  //         console.error("Error getting user data", error);
-  //         setError("Cant retrieve user data");
-  //       } finally {
-  //         setLoading(false);
-  //       }
-  //     };
-
-  //     getUserData();
-  //   } else {
-  //     setLoading(false);
-  //   }
-  // }, [BASE_URL, authenticated]);
-
   return (
     <AuthenticationProvider>
       <BrowserRouter>

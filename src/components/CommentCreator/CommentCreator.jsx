@@ -5,7 +5,7 @@ function CommentCreator({ handleSubmitComment, setComment, comment }) {
     <div>
       <h2>Comment Section</h2>
       <textarea
-        placeholder="Let the next reader know where you were and what you were thinking when you read this!"
+        placeholder="Please leave your thoughts for the next reader."
         value={comment}
         onChange={(e) => setComment(e.target.value)}
       />
