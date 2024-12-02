@@ -26,37 +26,31 @@ function SignUpPage() {
       setError("All fields are required.");
       return;
     }
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    
+    if (!emailRegex.test(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
 
     if (password !== confirmPassword) {
       setError("Passwords must match.");
       return;
     }
- console.log(userData)
 
-    // const emailRegex = /^(?![_.])[A-Za-z0-9._%+-]+(?:[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,})$/;
-    // if (!emailRegex.test(email)) {
-    //   setError("Please enter a valid email address.");
-    //   return;
-    // }
-
-    // if (!/[a-z]/.test(password)) {
-    //   setError("Password must contain at least one lowercase letter.");
-    //   return;
-    // }
-    // if (!/[A-Z]/.test(password)) {
-    //   setError("Password must contain at least one uppercase letter.");
-    //   return;
-    // }
-
-    // if (!/\d/.test(password)) {
-    //   setError("Password must contain at least one number.");
-    //   return;
-    // }
-
-    // if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-    //   setError("Password must contain at least one special character.");
-    //   return;
-    // }
+    const passwordRequirements = [
+      { regex: /[a-z]/, message: "Password must contain at least one lowercase letter." },
+      { regex: /[A-Z]/, message: "Password must contain at least one uppercase letter." },
+      { regex: /\d/, message: "Password must contain at least one number." },
+      { regex: /[!@#$%^&*(),.?":{}|<>]/, message: "Password must contain at least one special character." }
+    ];
+  
+    for (let requirement of passwordRequirements) {
+      if (!requirement.regex.test(password)) {
+        setError(requirement.message);
+        return false;
+      }
+    }
 
     try {
       const response = await axios.post(`${BASE_URL}/signup`, userData, {
@@ -64,13 +58,13 @@ function SignUpPage() {
           "Content-Type": "application/json",
         },
       });
-      console.log(response)
 
       if (response.status === 201) {
         alert("User created successfully!");
 
         try {
-          await login(username, password);
+          setError("")
+          login(username, password);
 
           if (!error) {
             const from = location.state?.from || "/home";
@@ -146,6 +140,8 @@ function SignUpPage() {
         <button className="sign-up__form-button"
         type="submit">Sign Up</button>
       </form>
+
+      {error && <div>{error}</div>}
     </div>
   );
 }

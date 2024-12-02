@@ -17,7 +17,7 @@ function CreateQrCode({ qrCodeUrl, setQrCodeUrl, qrCodeId, showQr }) {
 
   useEffect(() => {
     if (qrCodeId) {
-      generateQrCode(`http://localhost:5173/comments/${qrCodeId}`);
+      generateQrCode(`https://674e4175a2cbff6d9d5e5962--booktale.netlify.app/comments/${qrCodeId}`);
     }
   }, [qrCodeId]);
 

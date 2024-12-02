@@ -68,7 +68,7 @@ export const AuthenticationProvider = ({ children }) => {
     } else {
       setAuthenticated(false);
     }
-  }, [BASE_URL]);
+  }, [token]);
 
   const login = async (username, password) => {
     try {
