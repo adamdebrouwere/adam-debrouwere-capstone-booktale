@@ -1,27 +1,38 @@
-import React from 'react'
-import { useAuthentication } from '../AuthenticationContext/AuthenticationContext'
+import React from "react";
+import { useAuthentication } from "../AuthenticationContext/AuthenticationContext";
+import "./BookInfoDisplay.scss";
 
-function BookInfoDisplay({bookInfo}) {
+function BookInfoDisplay({ bookInfo }) {
   const { loading } = useAuthentication();
 
-  if(loading) {
-    return <div>Loading...</div>
+  if (loading) {
+    return <div>Loading...</div>;
   }
-  
+
   return (
-    <div>{bookInfo && (
-        <div>
-          <h2>{bookInfo.title}</h2>
-          <p><strong>Author(s):</strong> {bookInfo.author}</p>
-          {bookInfo.first_sentence && (<p><strong>First Sentence:</strong> {bookInfo.first_sentence}</p>)}
-          
-          <p><strong>Published Year:</strong> {bookInfo.publish_date}</p>
+    <div className="book-info">
+      {bookInfo && (
+        <div className="book-info__container">
           {bookInfo.cover_url && (
-            <img height="200" src={bookInfo.cover_url} alt={bookInfo.title} />
+            <img
+              className="book-info__image"
+              src={bookInfo.cover_url}
+              alt={bookInfo.title}
+            />
           )}
+          <h2 className="book-info__title">{bookInfo.title}</h2>
+          <p className="book-info__author">
+            <label className="book-info__label">Author: </label>
+            {bookInfo.author}
+          </p>
+          <p className="book-info__published">
+            <label className="book-info__label">Published:</label>
+            {bookInfo.publish_date}
+          </p>
         </div>
-      )}</div>
-  )
+      )}
+    </div>
+  );
 }
 
-export default BookInfoDisplay
+export default BookInfoDisplay;

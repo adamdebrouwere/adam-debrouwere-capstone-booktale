@@ -1,7 +1,8 @@
-import axios from "axios";
+import './BookCommentsPage.scss'
 import CommentCreator from "../../components/CommentCreator/CommentCreator.jsx";
 import CommentDisplay from "../../components/CommentDisplay/CommentDisplay.jsx";
 import BookInfoDisplay from "../../components/BookInfoDisplay/BookInfoDisplay.jsx";
+import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { XMLParser } from "fast-xml-parser";
@@ -80,34 +81,23 @@ function BookCommentPage() {
 
   async function postComment(id, newComment) {
     try {
-      const token = Cookies.get("token");
       if (!token) {
         alert("You must be logged in to post a comment.");
         return;
       }
 
+      
       if (comments.some((userComment) => userComment.user_id === user.id)) {
         alert(
           "You have already commented. Scan another qr or create your own!"
         );
         return;
       }
-
-      // const geoLocationPermission = window.confirm(
-      //   "Do you want to include your location in your comment?"
-      // );
-
-      // if (!geoLocationPermission) {
-      //   await axios.post(
-      //     `${BASE_URL}/booktale/${id}`,
-      //     { comment: newComment, username: user.username },
-      //     {
-      //       headers: {
-      //         Authorization: `Bearer ${token}`,
-      //       },
-      //     }
-      //   );
-      // } 
+      
+      if (!comment) {
+        alert("You must input something to commment.")
+        return
+      }
 
       const position = await new Promise((resolve, reject) => {
         if (navigator.geolocation) {
@@ -122,7 +112,7 @@ function BookCommentPage() {
             (error) => {
               reject(error);
             },
-            { enabledHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+            { enabledHighAccuracy: true, timeout: 20000, maximumAge: 0 }
           );
         } else {
           reject("Geolocation failure");
@@ -145,12 +135,12 @@ function BookCommentPage() {
           comment: newComment,
           username: user.username,
           location: {
-            longitude: position.longitude,
-            latitude: position.latitude,
-            heading: position.heading,
-            city: location.city,
-            state: location.state,
-            country: location.country,
+            longitude: position.longitude || 0,
+            latitude: position.latitude || 0,
+            heading: position.heading || "",
+            city: location.city || "",
+            state: location.state || "",
+            country: location.country || "",
           },
         },
         {
@@ -170,13 +160,13 @@ function BookCommentPage() {
 
   const handleSubmitComment = async (e) => {
     e.preventDefault();
-    const token = Cookies.get("token");
     if (!token) {
       setError("You must be logged in to comment");
       return;
     }
-
+    
     postComment(qrCodeId, comment);
+    setComment("")
   };
 
   if (loading) {
@@ -184,17 +174,17 @@ function BookCommentPage() {
   }
 
   return (
-    <div className="">
+    <div className="book-comment-page">
       <BookInfoDisplay bookInfo={bookInfo} />
       {user ? (<CommentCreator
         handleSubmitComment={handleSubmitComment}
         setComment={setComment}
-        id={qrCodeId}
-      />) : <div>
+        comment={comment}
+      />) : <div className="book-comment-page__button-container">
         <button onClick={() => navigate("/login", {state: { from }})}>Log In</button>
-        <button onClick={() => navigate("/signup", {state: { from }})}>Signup</button>
+        <button onClick={() => navigate("/signup", {state: { from }})}>Sign Up</button>
         </div>}
-      <CommentDisplay comments={comments} BASE_URL={BASE_URL} />
+      <CommentDisplay comments={comments} />
     </div>
   );
 }

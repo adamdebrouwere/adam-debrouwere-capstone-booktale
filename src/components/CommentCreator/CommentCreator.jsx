@@ -1,15 +1,16 @@
+import './CommentCreator.scss'
 
 function CommentCreator({ handleSubmitComment, setComment, comment }) {
-
   return (
-    <div>
-      <h2>Comment Section</h2>
+    <div className="comment-creator">
+      <h2 className="comment-creator__title">Leave Your Tale Behind</h2>
       <textarea
-        placeholder="Please leave your thoughts for the next reader."
+        className="comment-creator__input"
+        placeholder="Share here!"
         value={comment}
         onChange={(e) => setComment(e.target.value)}
       />
-      <button onClick={handleSubmitComment}>Submit Comment</button>
+      <button className="comment-creator__button"onClick={handleSubmitComment}>Submit Tale</button>
     </div>
   );
 }

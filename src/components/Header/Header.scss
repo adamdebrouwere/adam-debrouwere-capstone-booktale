@@ -1,0 +1,30 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.header {
+  @include flex-center();
+  padding: 1rem;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+
+  @include tablet {
+    padding: 1rem 5rem;
+  }
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+
+&__welcome-message {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+&__right-side {
+  @include flex-center();
+  gap: 2rem;
+}
+}

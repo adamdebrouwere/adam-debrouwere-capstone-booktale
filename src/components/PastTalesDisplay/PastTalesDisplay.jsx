@@ -1,70 +1,66 @@
+import "./PastTalesDisplay.scss";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuthentication } from "../AuthenticationContext/AuthenticationContext";
 
 function PastTalesDisplay() {
-  const [pastTales, setPastTales] = useState([]);
-  const { error, setError, loading, setLoading, BASE_URL, user, token } =
+  const { loading, setLoading, pastTales, getPastBooksData } =
     useAuthentication();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
   useEffect(() => {
-    if (user) {
-      setLoading(true)
-      const getPastBooksData = async () => {
-        try {
-          const response = await axios.get(`${BASE_URL}/pastTales/${user.id}`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-
-          setPastTales(response.data.user_books);
-        } catch (error) {
-          setError(`Error fetching book data: ${error}`);
-        } finally {
-          setLoading(false);
-        }
-      };
-
-      getPastBooksData();
-    } else {
-      setLoading(false);
-      setError("No token found. Please log in.");
-    }
+    setLoading(true);
+    getPastBooksData();
+    setLoading(false);
   }, []);
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div>
-      <h1>Past Tales</h1>
-      <div>
-        {pastTales.map((tale) => {
-          const date = new Date(tale.created_at);
+    <div className="past-tales">
+      <h1 className="past-tales__title">Past Tales</h1>
 
-          const formattedDate = new Intl.DateTimeFormat("en-US", {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          }).format(date);
+      {pastTales.map((tale) => {
+        const date = new Date(tale.created_at);
 
-          return (
-            <div key={tale.id}>
-            <h4>{tale.title}</h4>
-            <p>{tale.author}</p>
+        const formattedDate = new Intl.DateTimeFormat("en-US", {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        }).format(date);
+
+        return (
+          <div
+            className="past-tales__container"
+            key={tale.id}
+            onClick={() => navigate(`/booktale/${tale.qr_code_id}`)}
+          >
             <img
-              height="200"
+              className="past-tales__image"
               src={tale.cover_url}
-              alt={`cover for ${tale.title}`} onClick={() => navigate(`/booktale/${tale.qr_code_id}`) }
+              alt={`Cover for ${tale.title}`}
             />
-            <p>I said: {tale.comment}</p>
-            <p>On: {formattedDate}</p>
+            <div className="past-tales__copy">
+              <h4 className="past-tales__book-title">{tale.title}</h4>
+              <p className="past-tales__author">{tale.author}</p>
+
+              <p className="past-tales__comment">
+                <span className="past-tales__comment-bold">My thoughts: </span>
+                {tale.comment}
+              </p>
+              <p className="past-tales__date">
+                <span className="past-tales__date-bold">On: </span>
+                {formattedDate}
+              </p>
+            </div>
           </div>
-          )
-          
-        })}
-      </div>
+        );
+      })}
     </div>
   );
 }

@@ -1,25 +1,32 @@
-import React, { useState } from "react";
+import "./CreateBookTalePage.scss";
+
+import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import BookInfoDisplay from "../../components/BookInfoDisplay/BookInfoDisplay.jsx";
 import BookSearch from "../../components/BookSearch/BookSearch.jsx";
 import CreateQrCode from "../../components/CreateQrCode/CreateQrCode.jsx";
-import Cookies from "js-cookie"
+// import Cookies from "js-cookie"
 import { useAuthentication } from "../../components/AuthenticationContext/AuthenticationContext.jsx";
-
+import { v4 as uuidv4 } from "uuid";
 
 const CreateBookTalePage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [bookInfo, setBookInfo] = useState(null);
   const [qrCodeId, setQrCodeId] = useState("");
   const [qrCodeUrl, setQrCodeUrl] = useState("");
-  const { BASE_URL, error, loading, setError, setLoading } = useAuthentication()
+  const [showQr, setShowQr] = useState(false);
+  const { BASE_URL, error, loading, setError, setLoading, token } =
+    useAuthentication();
 
-  const navigate = useNavigate()
-  
-  const fetchBookInfo = async () => {
+  const navigate = useNavigate();
+
+  const fetchBookInfo = async (e) => {
+    e.preventDefault();
+
+    setShowQr(false);
     if (!searchQuery) {
-      alert("Search Query Empty");
+      alert("Search query empty.");
       return;
     }
 
@@ -47,7 +54,7 @@ const CreateBookTalePage = () => {
             ? `https://covers.openlibrary.org/b/id/${bookData.cover_i}-L.jpg`
             : null,
         };
-
+        handleQrCodeId();
         setBookInfo(bookDetails);
       } else {
         setError("No books found.");
@@ -62,11 +69,9 @@ const CreateBookTalePage = () => {
 
   const handleCreateBooktale = async () => {
     if (!bookInfo || !qrCodeId || !qrCodeUrl) {
-      alert("No book info or Qrcode.");
+      alert("No book info.");
       return;
     }
-
-    const token = Cookies.get("token");
 
     if (!token) {
       alert("You must be logged in to create a Booktale");
@@ -74,6 +79,7 @@ const CreateBookTalePage = () => {
 
     try {
       const { title, author, publish_date, cover_url } = bookInfo;
+
       const response = await axios.post(
         `${BASE_URL}/booktale`,
         {
@@ -92,36 +98,50 @@ const CreateBookTalePage = () => {
       );
 
       alert("Booktale successfully created.");
-      navigate(`/booktale/${qrCodeId}`)
+      // navigate(`/booktale/${qrCodeId}`)
+      setShowQr(true);
     } catch (error) {
       setError("error posting book and qr code data.");
       console.error("error posting book and qr code data", error);
     }
   };
 
+  const handleQrCodeId = () => {
+    const uniqueId = uuidv4();
+    setQrCodeId(uniqueId);
+  };
+
   // if (loading) {
-  //   return <div>Loading...</div>
+  //   // return <div>Loading...</div>
   // }
 
   return (
-    <div>
-      <BookSearch
+    <div className="create-booktale">
+      {!showQr && <BookSearch
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
         fetchBookInfo={fetchBookInfo}
-      />
+      />}
       {/* {loading && <p>Loading...</p>} */}
 
       {error && <p>{error}</p>}
 
-      <BookInfoDisplay bookInfo={bookInfo} />
-      <CreateQrCode
-        qrCodeUrl={qrCodeUrl}
-        setQrCodeId={setQrCodeId}
-        qrCodeId={qrCodeId}
-        setQrCodeUrl={setQrCodeUrl}
-      />
-      <button onClick={handleCreateBooktale}>Create Booktale</button>
+      {!showQr && <BookInfoDisplay bookInfo={bookInfo} />}
+      {
+        <CreateQrCode
+          qrCodeUrl={qrCodeUrl}
+          qrCodeId={qrCodeId}
+          setQrCodeUrl={setQrCodeUrl}
+          showQr={showQr}
+        />
+      }
+      {!showQr && (
+        <button onClick={handleCreateBooktale}>Create Booktale</button>
+      )}
+
+      
+
+
     </div>
   );
 };

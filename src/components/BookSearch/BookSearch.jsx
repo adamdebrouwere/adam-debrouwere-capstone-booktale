@@ -1,16 +1,19 @@
-import React from "react";
+import "./BookSearch.scss";
 
 function BookSearch({ searchQuery, setSearchQuery, fetchBookInfo }) {
   return (
-    <div>
-      <h1>Book Search</h1>
-      <input
-        type="text"
-        placeholder="Enter book title."
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-      />
-      <button onClick={fetchBookInfo}>Search</button>
+    <div className="book-search">
+      <form className="book-search__form" onSubmit={fetchBookInfo}>
+        <h1 className="book-search__form-title">Book Search</h1>
+        <input
+        className="book-search__form-input"
+          type="text"
+          placeholder="Enter book title"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <button className="book-search__form-button" type="submit">Search</button>
+      </form>
     </div>
   );
 }

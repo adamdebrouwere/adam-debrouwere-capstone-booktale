@@ -1,0 +1,22 @@
+@use "src/styles/partials/_mixins" as *;
+@use "src/styles/partials/variables" as *; 
+
+.comment-creator {
+    @include flex-center(column);
+    padding: 1rem 0;
+    margin: 1.5rem 0;
+    gap: 1rem;
+    color: $color-dark-brown-booktale;
+    border-top: .0625rem solid $color-dark-brown-booktale;
+
+
+    &__title {
+        font-size: 1.5rem;
+    }
+    &__input {
+        @include input-field;
+        resize: none;
+        width: 100%;
+       }
+
+}

@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+
+import './SignUpPage.scss';
+import{ useState } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuthentication } from "../../components/AuthenticationContext/AuthenticationContext";
@@ -8,11 +10,11 @@ function SignUpPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  
+
   const navigate = useNavigate();
   const location = useLocation();
-  
-  const { BASE_URL, login, error, setError } = useAuthentication()
+
+  const { BASE_URL, login, error, setError } = useAuthentication();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,7 +22,7 @@ function SignUpPage() {
     setError("");
 
     const userData = { username, email, password };
-
+   
     if (!username || !email || !password || !confirmPassword) {
       setError("All fields are required.");
       return;
@@ -30,17 +32,32 @@ function SignUpPage() {
       setError("Passwords must match.");
       return;
     }
+ console.log(userData)
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setError("Please enter a valid email address.");
-      return;
-    }
+    // const emailRegex = /^(?![_.])[A-Za-z0-9._%+-]+(?:[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,})$/;
+    // if (!emailRegex.test(email)) {
+    //   setError("Please enter a valid email address.");
+    //   return;
+    // }
 
-    if (password.length < 6) {
-      setError("Password must be at least 6 characters long.");
-      return;
-    }
+    // if (!/[a-z]/.test(password)) {
+    //   setError("Password must contain at least one lowercase letter.");
+    //   return;
+    // }
+    // if (!/[A-Z]/.test(password)) {
+    //   setError("Password must contain at least one uppercase letter.");
+    //   return;
+    // }
+
+    // if (!/\d/.test(password)) {
+    //   setError("Password must contain at least one number.");
+    //   return;
+    // }
+
+    // if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+    //   setError("Password must contain at least one special character.");
+    //   return;
+    // }
 
     try {
       const response = await axios.post(`${BASE_URL}/signup`, userData, {
@@ -48,26 +65,22 @@ function SignUpPage() {
           "Content-Type": "application/json",
         },
       });
+      console.log(response)
 
       if (response.status === 201) {
         alert("User created successfully!");
 
         try {
           await login(username, password);
-        
+
           if (!error) {
-            const from  = location.state?.from || "/home"
-            navigate(from, {replace: true});
+            const from = location.state?.from || "/home";
+            navigate(from, { replace: true });
           }
         } catch (error) {
-          console.error("Login error:", error)
+          console.error("Login error:", error);
         }
-
-          
-        
       }
-
-      
     } catch (error) {
       if (error.response) {
         setError(error.response.data.error || "An error occurred.");
@@ -78,12 +91,13 @@ function SignUpPage() {
   };
 
   return (
-    <div>
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username: </label>
+    <div className="sign-up">
+
+      <form className="sign-up__form"onSubmit={handleSubmit}>      <h1 className="sign-up__title">Sign Up</h1>
+        <div className="sign-up__form-field">
+          <label className="sign-up__form-field-label" htmlFor="username">Username: </label>
           <input
+          className="sign-up__form-field-input"
             type="text"
             id="username"
             value={username}
@@ -92,9 +106,12 @@ function SignUpPage() {
           />
         </div>
 
-        <div>
-          <label htmlFor="email">Email: </label>
+        <div
+        className="sign-up__form-field">
+          <label 
+          className="sign-up__form-field-label" htmlFor="email">Email: </label>
           <input
+          className="sign-up__form-field-input"
             type="email"
             id="email"
             value={email}
@@ -103,9 +120,10 @@ function SignUpPage() {
           />
         </div>
 
-        <div>
-          <label htmlFor="password">Password: </label>
+        <div className="sign-up__form-field">
+          <label className="sign-up__form-field-label" htmlFor="password">Password: </label>
           <input
+          className="sign-up__form-field-input"
             type="password"
             id="password"
             value={password}
@@ -114,9 +132,10 @@ function SignUpPage() {
           />
         </div>
 
-        <div>
-          <label htmlFor="confirmPassword">Confirm Password: </label>
+        <div className="sign-up__form-field">
+          <label className="ssign-up__form-field-label" htmlFor="confirmPassword">Confirm Password: </label>
           <input
+          className="sign-up__form-field-input"
             type="password"
             id="confirmPassword"
             value={confirmPassword}
@@ -125,7 +144,8 @@ function SignUpPage() {
           />
         </div>
 
-        <button type="submit">Sign Up</button>
+        <button className="sign-up__form-button"
+        type="submit">Sign Up</button>
       </form>
     </div>
   );

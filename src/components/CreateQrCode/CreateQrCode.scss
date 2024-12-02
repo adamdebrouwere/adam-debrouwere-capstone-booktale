@@ -1,0 +1,15 @@
+@use "src/styles/partials/_mixins" as *;
+@use "src/styles/partials/variables" as *;
+
+.qr-code {
+    @include flex-center(column);
+    gap: 1rem;
+    color: $color-dark-brown-booktale;
+
+    &__button {
+        &-container {
+            @include flex-center();
+            gap: 1rem;
+        }
+    }
+}

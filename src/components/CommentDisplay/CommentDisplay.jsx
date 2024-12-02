@@ -1,5 +1,4 @@
-// import "./CommentDisplay.scss";
-
+import "./CommentDisplay.scss";
 
 function CommentDisplay({ comments }) {
   if (!comments) {
@@ -16,7 +15,6 @@ function CommentDisplay({ comments }) {
         const date = new Date(comment.created_at);
 
         const formattedDate = new Intl.DateTimeFormat("en-US", {
-          weekday: "long",
           year: "numeric",
           month: "long",
           day: "numeric",
@@ -25,19 +23,13 @@ function CommentDisplay({ comments }) {
         return (
           <section className="comment" key={comment.id}>
             <div className="comment__left">
-              <div className="comment__profile">
-                <div className="comment__profile-img-placeholder"></div>
-              </div>
+              <p className="comment__commentor">{comment.username}</p>
+              <p className="comment__location">{`In ${comment.city}, ${comment.country}`}</p>
+              <p className="comment__timestamp">{` on ${formattedDate}`}</p>
+              
             </div>
             <div className="comment__right">
-              <div className="comment__right-top">
-                <p className="comment__commentor">{comment.username}</p>
-                <p className="comment__location">{`${comment.city}, ${comment.state}, ${comment.country}`}</p>
-                <p className="comment__timestamp">{formattedDate}</p>
-              </div>
-              <div className="comment__right-bottom">
-                <p className="comment__comment">{comment.comment}</p>
-              </div>
+              <p className="comment__comment">{comment.comment}</p>
             </div>
           </section>
         );

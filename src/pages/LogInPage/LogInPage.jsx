@@ -1,13 +1,15 @@
-// import { useState } from "react";
-// import axios from "axios";
+import './LogInPage.scss'
 import { useNavigate, useLocation } from "react-router-dom";
-// import Cookies from "js-cookie";
 import { useAuthentication } from "../../components/AuthenticationContext/AuthenticationContext";
 
 function LogInPage() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { login, loading, error } = useAuthentication();
+  const { login, error, setError } = useAuthentication();
+
+  useEffect(() => {
+    setError("")
+  }, [])
 
   const from = location.state?.from || "/home";
 
@@ -32,42 +34,36 @@ function LogInPage() {
     }
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   return (
-    <div className="LogInPage">
-      <div>
-        <h3>Login</h3>
+    <div className="log-in-page">
+        
         <form className="form" onSubmit={handleLogin}>
+          <h3 className="form__title">Login</h3>
           <input
             className="form__input"
             type="text"
             name="username"
-            placeholder="username"
+            placeholder="Username"
             autoComplete="username"
           />
           <input
             className="form__input"
             type="password"
             name="password"
-            placeholder="password"
+            placeholder="Password"
             autoComplete="current-password"
           />
-          <button className="form__btn" type="submit">
+          <button className="form__button" type="submit">
             Login
           </button>
           <button
-            className="form__btn"
-            type="submit"
+            className="form__button"
             onClick={() => navigate("/signup")}
           >
             Sign Up
           </button>
           {error && <p>{error}</p>}
         </form>
-      </div>
     </div>
   );
 }
