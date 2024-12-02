@@ -13,6 +13,7 @@ const AuthenticationContext = createContext({
   setError: () => {},
   error: null,
   BASE_URL: "",
+  HOST_URL: "",
   token: "",
   getPastBooksData: () => {},
   pastTales: null,
@@ -30,6 +31,7 @@ export const AuthenticationProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [pastTales, setPastTales] = useState([]);
   const BASE_URL = import.meta.env.VITE_BASE_URL;
+  const HOST_URL = import.meta.env.VITE_HOST_URL;
   const token = Cookies.get("token");
 
   useEffect(() => {
@@ -138,6 +140,7 @@ export const AuthenticationProvider = ({ children }) => {
         error,
         setError,
         BASE_URL,
+        HOST_URL,
         token,
         getPastBooksData,
         pastTales,
