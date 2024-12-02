@@ -2,6 +2,23 @@
 
 BookTale
 
+## How To Build
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build the application for production
+npm run build
+
+# Preview the production build
+npm run preview
+
+# Lint the project files
+npm run lint
+
 ## Overview
 
 I am creating an app that uses qr codes to create exclusive comment sections for individual books. It will include user authentication and book and comment saving. 

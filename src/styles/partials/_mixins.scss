@@ -1,0 +1,40 @@
+@use "./variables" as *;
+
+//responsiveness mixins
+@mixin tablet {
+  @media (min-width: $tablet-min-width) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $desktop-min-width) {
+    @content;
+  }
+}
+
+//functions
+@mixin flex-center($direction: row, $justify: center, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin border-bottom {
+  border-bottom: 0.0625rem solid $color-Mercury;
+}
+
+@mixin input-field {
+  border: 0;
+  z-index: 1;
+  background-color: transparent;
+  border-bottom: 2px solid #eee;
+  font: inherit;
+  font-size: 1.125rem;
+  padding: 0.25rem 0;
+  &:focus {
+    outline: 0;
+    border-bottom-color: $color-brown-booktale;
+  }
+}

@@ -1,0 +1,14 @@
+@use "src/styles/partials/_mixins" as *;
+@use "src/styles/partials/variables" as *;
+
+
+.book-search {
+    color: $color-dark-brown-booktale;
+
+    &__form {
+        &-input {
+            @include input-field;
+            margin: 0 2rem 0 0;
+        }
+    }
+}

@@ -1,0 +1,33 @@
+@use "src/styles/partials/_mixins" as *;
+@use "src/styles/partials/variables" as *; 
+
+
+.book-info {
+    width: 100%;
+    @include flex-center();
+    padding: 1rem 0 0;
+    color: $color-dark-brown-booktale;
+
+    &__container {
+        @include flex-center(column);
+        gap: 1rem;
+    }
+
+    &__image {
+        width: 10rem;
+        box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    &__title {
+        font-size: 1rem;
+    }
+
+    &__label {
+        font-weight: 600;
+    }
+
+
+
+
+
+}

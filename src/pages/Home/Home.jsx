@@ -1,24 +1,33 @@
-import axios from "axios";
-import React from "react";
-import { useState, useEffect } from "react";
+import "./Home.scss";
+import { useNavigate } from "react-router-dom";
+import { useAuthentication } from "../../components/AuthenticationContext/AuthenticationContext";
+import PastTalesDisplay from "../../components/PastTalesDisplay/PastTalesDisplay.jsx";
 
-function Home({BASE_URL}) {
-  const [response, setResponse] = useState("");
+function Home() {
+  const { loading, error } = useAuthentication();
+  const navigate = useNavigate();
   
-  const fetchFromServer = async () => {
-    try {
-      const response = await axios.get(`${BASE_URL}`);
-      console.log(response.data)
-      setResponse(response);
-    } catch (error) {
-      console.error("error fetching video data:", error);
+  
+  if (loading) {
+      return <div>Loading...</div>;
     }
-  };
 
-  useEffect(() => {
-    fetchFromServer();
-  }, [])
-  return <div className="home">{response.data}</div>;
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  return (
+    <div className="home">
+      <button
+        className="home__create-button"
+        onClick={() => navigate("/create-booktale")}
+      >
+        CREATE A Booktale
+      </button>
+      <PastTalesDisplay />
+      
+    </div>
+  );
 }
 
 export default Home;

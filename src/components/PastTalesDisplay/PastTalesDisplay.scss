@@ -1,0 +1,35 @@
+@use "src/styles/partials/_mixins" as *;
+@use "src/styles/partials/variables" as *;
+
+.past-tales {
+  @include flex-center(column);
+  padding: 1rem 0;
+
+  &__container {
+    @include flex-center;
+    padding: 0 0 1.5rem 0;
+    gap: 5rem;
+  }
+  &__image {
+    width: 10rem;
+    box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.3);
+  }
+  &__title {
+    padding: 0 0 1rem 0;
+  }
+  &__author {
+    padding: 0 0 1rem 0;
+  }
+
+  &__comment {
+    &-bold {
+        font-weight: 600;
+    }
+  }
+
+  &__date {
+    &-bold {
+        font-weight: 600;
+    }
+  }
+}
