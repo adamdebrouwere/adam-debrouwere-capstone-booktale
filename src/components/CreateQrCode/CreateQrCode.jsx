@@ -3,7 +3,7 @@ import QrCode from "qrcode";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-function CreateQrCode({ qrCodeUrl, setQrCodeUrl, qrCodeId, showQr }) {
+function CreateQrCode({ qrCodeUrl, setQrCodeUrl, qrCodeId, showQr, HOST_URL }) {
   const navigate = useNavigate();
 
   const generateQrCode = async (data) => {
@@ -17,7 +17,7 @@ function CreateQrCode({ qrCodeUrl, setQrCodeUrl, qrCodeId, showQr }) {
 
   useEffect(() => {
     if (qrCodeId) {
-      generateQrCode(`https://674e4175a2cbff6d9d5e5962--booktale.netlify.app/comments/${qrCodeId}`);
+      generateQrCode(`${HOST_URL}/comments/${qrCodeId}`);
     }
   }, [qrCodeId]);
 
