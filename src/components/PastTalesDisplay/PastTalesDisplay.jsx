@@ -1,7 +1,6 @@
 import "./PastTalesDisplay.scss";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useAuthentication } from "../AuthenticationContext/AuthenticationContext";
 
 function PastTalesDisplay() {

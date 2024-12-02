@@ -11,12 +11,12 @@ function Landing() {
   const handleSignUp = () => {
     navigate("/signup");
   };
+
   return (
     <div className="landing">
       <h1 className="landing__title">Welcome to Booktale</h1>
       <p className="landing__tag-line">
-        The online platform that allows you to connect with the past and future
-        readers of used books.
+        The online platform that allows you to connect with the past and future readers of used books.
       </p>
       <div>
         <div className="landing__button-container">

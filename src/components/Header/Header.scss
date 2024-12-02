@@ -4,8 +4,8 @@
 .header {
   @include flex-center();
   padding: 1rem;
-  background-color: #fff;
-  border-bottom: 1px solid #ddd;
+  background-color: #ffffff;
+  border-bottom: 1px solid #dddddd;
 
   @include tablet {
     padding: 1rem 5rem;
@@ -18,13 +18,18 @@
   width: 100%;
   align-items: center;
 
-&__welcome-message {
-  font-size: 1.125rem;
-  font-weight: 600;
-}
+  &__welcome-message {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: $color-brown-booktale;
+  }
 
-&__right-side {
-  @include flex-center();
-  gap: 2rem;
-}
+  &__right-side {
+    @include flex-center();
+    gap: 0.5rem;
+
+    @include tablet {
+      gap: 2rem;
+    }
+  }
 }

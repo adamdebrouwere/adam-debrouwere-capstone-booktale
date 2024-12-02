@@ -23,17 +23,6 @@ function CreateQrCode({ qrCodeUrl, setQrCodeUrl, qrCodeId, showQr }) {
 
   function handlePrintQrCode() {
     if (qrCodeId) {
-      // let dialogueOpened = false;
-
-      // window.addEventListener("beforeprint", () => {
-      //   dialogueOpened = true;
-      // });
-
-      // window.addEventListener("afterprint", function () {
-      //   if (!dialogueOpened) {
-      //     navigate(`/booktale/${qrCodeId}`);
-      //   }
-      // });
       window.print();
     }
   }

@@ -40,9 +40,6 @@ function Header() {
             <h1>Booktale</h1>
           </Link>
         </div>
-
-          
-
         <div className="nav__right-side">
           <h2 className="nav__welcome-message">Welcome, {user.username}</h2>
           <button className="nav__logout-button" onClick={handleLogout}>

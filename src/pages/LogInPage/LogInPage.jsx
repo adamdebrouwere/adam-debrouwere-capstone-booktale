@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import './LogInPage.scss'
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuthentication } from "../../components/AuthenticationContext/AuthenticationContext";
@@ -9,7 +10,7 @@ function LogInPage() {
 
   useEffect(() => {
     setError("")
-  }, [])
+  }, [setError])
 
   const from = location.state?.from || "/home";
 
@@ -24,7 +25,7 @@ function LogInPage() {
       return;
     }
     try {
-      await login(username, password);
+      login(username, password);
    
       if (!error) {
         navigate(from);

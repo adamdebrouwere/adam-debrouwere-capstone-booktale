@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import BookInfoDisplay from "../../components/BookInfoDisplay/BookInfoDisplay.jsx";
 import BookSearch from "../../components/BookSearch/BookSearch.jsx";
 import CreateQrCode from "../../components/CreateQrCode/CreateQrCode.jsx";
-// import Cookies from "js-cookie"
 import { useAuthentication } from "../../components/AuthenticationContext/AuthenticationContext.jsx";
 import { v4 as uuidv4 } from "uuid";
 
@@ -80,7 +79,7 @@ const CreateBookTalePage = () => {
     try {
       const { title, author, publish_date, cover_url } = bookInfo;
 
-      const response = await axios.post(
+      await axios.post(
         `${BASE_URL}/booktale`,
         {
           title,
@@ -98,7 +97,6 @@ const CreateBookTalePage = () => {
       );
 
       alert("Booktale successfully created.");
-      // navigate(`/booktale/${qrCodeId}`)
       setShowQr(true);
     } catch (error) {
       setError("error posting book and qr code data.");
@@ -111,10 +109,6 @@ const CreateBookTalePage = () => {
     setQrCodeId(uniqueId);
   };
 
-  // if (loading) {
-  //   // return <div>Loading...</div>
-  // }
-
   return (
     <div className="create-booktale">
       {!showQr && <BookSearch
@@ -122,8 +116,6 @@ const CreateBookTalePage = () => {
         setSearchQuery={setSearchQuery}
         fetchBookInfo={fetchBookInfo}
       />}
-      {/* {loading && <p>Loading...</p>} */}
-
       {error && <p>{error}</p>}
 
       {!showQr && <BookInfoDisplay bookInfo={bookInfo} />}
@@ -138,10 +130,6 @@ const CreateBookTalePage = () => {
       {!showQr && (
         <button onClick={handleCreateBooktale}>Create Booktale</button>
       )}
-
-      
-
-
     </div>
   );
 };

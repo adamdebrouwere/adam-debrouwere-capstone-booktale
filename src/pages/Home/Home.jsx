@@ -11,7 +11,6 @@ function Home() {
   if (loading) {
       return <div>Loading...</div>;
     }
-  
 
   if (error) {
     return <div>Error: {error}</div>;
@@ -19,13 +18,14 @@ function Home() {
 
   return (
     <div className="home">
-      <PastTalesDisplay />
       <button
         className="home__create-button"
         onClick={() => navigate("/create-booktale")}
       >
         CREATE A Booktale
       </button>
+      <PastTalesDisplay />
+      
     </div>
   );
 }
