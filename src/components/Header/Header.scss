@@ -22,11 +22,12 @@
     font-size: 1.125rem;
     font-weight: 600;
     color: $color-brown-booktale;
+    padding: 0  0 0 1rem;
   }
 
   &__right-side {
     @include flex-center();
-    gap: 0.5rem;
+    gap: 0.25rem;
 
     @include tablet {
       gap: 2rem;

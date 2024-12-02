@@ -6,7 +6,6 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { XMLParser } from "fast-xml-parser";
-import Cookies from "js-cookie";
 import { useAuthentication } from "../../components/AuthenticationContext/AuthenticationContext.jsx";
 
 function BookCommentPage() {
@@ -44,7 +43,7 @@ function BookCommentPage() {
     } else {
       setLoading(false);
     }
-  }, [BASE_URL]);
+  }, [BASE_URL, token]);
 
   async function getComments(id) {
     try {

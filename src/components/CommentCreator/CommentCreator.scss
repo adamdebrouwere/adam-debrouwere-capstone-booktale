@@ -4,7 +4,7 @@
 .comment-creator {
     @include flex-center(column);
     padding: 1rem 0;
-    margin: 1.5rem 0 0.5;
+    margin: 1.5rem 0 0.5rem;
     gap: 1rem;
     color: $color-dark-brown-booktale;
     border-top: .0625rem solid $color-dark-brown-booktale;

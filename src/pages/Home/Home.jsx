@@ -4,7 +4,7 @@ import { useAuthentication } from "../../components/AuthenticationContext/Authen
 import PastTalesDisplay from "../../components/PastTalesDisplay/PastTalesDisplay.jsx";
 
 function Home() {
-  const { loading, error } = useAuthentication();
+  const { loading, error, pastTales } = useAuthentication();
   const navigate = useNavigate();
   
   
@@ -24,7 +24,7 @@ function Home() {
       >
         CREATE A Booktale
       </button>
-      <PastTalesDisplay />
+      {pastTales && <PastTalesDisplay />}
       
     </div>
   );
