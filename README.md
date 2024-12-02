@@ -1,6 +1,6 @@
 # Project Title
 
-BookTale
+Booktale
 
 ## How To Build
 
