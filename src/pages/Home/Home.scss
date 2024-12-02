@@ -1,0 +1,11 @@
+@use "src/styles/partials/_mixins" as *;
+@use "src/styles/partials/variables" as *;
+
+.home {
+    @include flex-center(column);
+    padding: 1.5rem 0.5rem;
+
+    &__create-button {
+        margin: 1rem 0;
+    }
+}

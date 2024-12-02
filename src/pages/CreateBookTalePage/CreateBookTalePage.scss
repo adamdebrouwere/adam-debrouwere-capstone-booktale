@@ -1,0 +1,8 @@
+@use "src/styles/partials/_mixins" as *;
+@use "src/styles/partials/variables" as *;
+
+.create-booktale {
+    @include flex-center(column);
+    gap: 1rem;
+    padding: 2rem 0;
+}

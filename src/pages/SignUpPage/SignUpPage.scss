@@ -1,0 +1,22 @@
+@use "src/styles/partials/_mixins" as *;
+@use "src/styles/partials/variables" as *;
+
+.sign-up {
+  @include flex-center(column);
+  width: 100%;
+  color: $color-dark-brown-booktale;
+  gap: 1rem;
+  padding: 2rem 0;
+
+  &__form {
+    @include flex-center(column);
+    gap: 1rem;
+
+    &-field {
+      align-self: flex-start;
+      &-input {
+        @include input-field;
+      }
+    }
+  }
+}

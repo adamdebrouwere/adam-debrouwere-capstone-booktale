@@ -2,6 +2,23 @@
 
 BookTale
 
+## How To Build
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build the application for production
+npm run build
+
+# Preview the production build
+npm run preview
+
+# Lint the project files
+npm run lint
+
 ## Overview
 
 I am creating an app that uses qr codes to create exclusive comment sections for individual books. It will include user authentication and book and comment saving. 
@@ -32,6 +49,7 @@ Travelers and used book enthusiasts alike. My initial idea for this app came fro
 HTML, scss, JavaScript, React, MySql, Express.
 
 Client side: react, react router, axios, html5-qrcode, qrcode-decoder-js, psql
+
 ServerSide: knex, uuid, qrcode, scrypt
 
 ### APIs
@@ -71,14 +89,19 @@ ServerSide: knex, uuid, qrcode, scrypt
 ### Endpoints
 
 GET books data from API
+
 GET user data, comment data, qrcode data, from server
+
 POST user data, comment data, qrcode data, from server
+
 PUT user data
 
 ## Roadmap
 
 Sprint 1 - qr code to comment section, db migrate and seed, log in UX for comments, create a BookTale
+
 Sprint 2 - connect to api to display book data, save users comments and books scanned, homepage and display books with new comments
+
 Sprint 3 -  style for all sizes - deploy
 
 ---

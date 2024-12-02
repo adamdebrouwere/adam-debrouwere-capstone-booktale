@@ -1,0 +1,35 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.header {
+  @include flex-center();
+  padding: 1rem;
+  background-color: #ffffff;
+  border-bottom: 1px solid #dddddd;
+
+  @include tablet {
+    padding: 1rem 5rem;
+  }
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+
+  &__welcome-message {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: $color-brown-booktale;
+  }
+
+  &__right-side {
+    @include flex-center();
+    gap: 0.5rem;
+
+    @include tablet {
+      gap: 2rem;
+    }
+  }
+}

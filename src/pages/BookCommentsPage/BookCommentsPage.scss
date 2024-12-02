@@ -1,0 +1,15 @@
+@use "src/styles/partials/_mixins" as *;
+@use "src/styles/partials/variables" as *; 
+
+
+.book-comment-page {
+    width: 100%;
+    @include flex-center(column);
+    
+    &__button-container {
+        @include flex-center();
+        padding: 1rem 0;
+        gap: 1rem;
+    }
+    
+}
