@@ -19,7 +19,7 @@ function CreateQrCode({ qrCodeUrl, setQrCodeUrl, qrCodeId, showQr }) {
 
   useEffect(() => {
     if (qrCodeId) {
-      generateQrCode(`${ORIGIN_URL}/comments/${qrCodeId}`);
+      generateQrCode(`${ORIGIN_URL}/booktale/${qrCodeId}`);
     }
   }, [qrCodeId]);
 
