@@ -2,9 +2,11 @@ import "./CreateQrCode.scss";
 import QrCode from "qrcode";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuthentication } from "../AuthenticationContext/AuthenticationContext";
 
-function CreateQrCode({ qrCodeUrl, setQrCodeUrl, qrCodeId, showQr, HOST_URL }) {
+function CreateQrCode({ qrCodeUrl, setQrCodeUrl, qrCodeId, showQr }) {
   const navigate = useNavigate();
+  const { ORIGIN_URL } = useAuthentication()
 
   const generateQrCode = async (data) => {
     try {
@@ -17,7 +19,7 @@ function CreateQrCode({ qrCodeUrl, setQrCodeUrl, qrCodeId, showQr, HOST_URL }) {
 
   useEffect(() => {
     if (qrCodeId) {
-      generateQrCode(`${HOST_URL}/comments/${qrCodeId}`);
+      generateQrCode(`${ORIGIN_URL}/comments/${qrCodeId}`);
     }
   }, [qrCodeId]);
 
