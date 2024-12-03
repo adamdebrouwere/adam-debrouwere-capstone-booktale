@@ -1,8 +1,12 @@
+import { useAuthentication } from "../../components/AuthenticationContext/AuthenticationContext";
 import "./Landing.scss";
 import { useNavigate } from "react-router-dom";
 
 function Landing() {
   const navigate = useNavigate();
+  const { setUser } = useAuthentication()
+
+  setUser(null)
 
   const handleLogin = () => {
     navigate("/login");
