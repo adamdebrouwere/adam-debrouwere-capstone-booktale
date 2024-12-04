@@ -1,22 +1,22 @@
 # Project Title
 
-BookTale
+Booktale
 
 ## How To Build
 
-# Install dependencies
+### Install dependencies
 npm install
 
-# Start development server
+### Start development server
 npm run dev
 
-# Build the application for production
+### Build the application for production
 npm run build
 
-# Preview the production build
+### Preview the production build
 npm run preview
 
-# Lint the project files
+### Lint the project files
 npm run lint
 
 ## Overview

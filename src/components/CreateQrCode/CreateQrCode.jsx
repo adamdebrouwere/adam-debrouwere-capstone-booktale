@@ -4,9 +4,10 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthentication } from "../AuthenticationContext/AuthenticationContext";
 
-function CreateQrCode({ qrCodeUrl, setQrCodeUrl, qrCodeId, showQr, HOST_URL }) {
+function CreateQrCode({ qrCodeUrl, setQrCodeUrl, qrCodeId, showQr }) {
   const navigate = useNavigate();
   const { ORIGIN_URL } = useAuthentication();
+
 
   const generateQrCode = async (data) => {
     try {
