@@ -3,20 +3,36 @@
 
 .sign-up {
   @include flex-center(column);
-  width: 100%;
   color: $color-dark-brown-booktale;
   gap: 1rem;
   padding: 2rem 0;
 
   &__form {
     @include flex-center(column);
+    margin: auto 0;
     gap: 1rem;
 
     &-field {
       align-self: flex-start;
+      
+      
       &-input {
         @include input-field;
+        &::placeholder {
+          font-size: 0.5rem;
+        }
       }
     }
   }
-}
+  &__tooltip {
+    width: 20rem;
+      background-color: #f0f0f0;
+      border: .0625rem solid #ccc;
+      padding: .3125rem;
+      font-size: .75rem;
+      color: #333;
+      border-radius: .25rem;
+      margin-top: .3125rem;
+      box-sizing: border-box;
+    }
+  }

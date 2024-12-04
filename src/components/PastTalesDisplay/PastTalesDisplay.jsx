@@ -18,7 +18,7 @@ function PastTalesDisplay() {
   if (loading) {
     return <div>Loading...</div>;
   }
-
+  
   return (
     <div className="past-tales">
       <h1 className="past-tales__title">Past Tales</h1>

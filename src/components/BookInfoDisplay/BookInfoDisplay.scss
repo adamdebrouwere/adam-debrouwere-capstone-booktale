@@ -10,8 +10,15 @@
 
     &__container {
         @include flex-center(column);
-        gap: 1rem;
-    }
+        margin: 0 0 1.5rem 0;
+        padding: 1.75rem 1rem 1.25rem 1rem;
+        border-radius: 0.5rem;
+        background-color: #fcf8f2;
+      
+        box-shadow: .125rem .125rem .3125rem .3125rem rgba(0, 0, 0, 0.1);
+        gap: 3rem;
+        transition: all 0.3s ease;
+      }
 
     &__image {
         width: 10rem;
@@ -25,9 +32,4 @@
     &__label {
         font-weight: 600;
     }
-
-
-
-
-
 }
