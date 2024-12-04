@@ -9,6 +9,7 @@ function SignUpPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showTooltip, setShowTooltip] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -42,7 +43,7 @@ function SignUpPage() {
       { regex: /[a-z]/, message: "Password must contain at least one lowercase letter." },
       { regex: /[A-Z]/, message: "Password must contain at least one uppercase letter." },
       { regex: /\d/, message: "Password must contain at least one number." },
-      { regex: /[!@#$%^&*(),.?":{}|<>]/, message: "Password must contain at least one special character." }
+      // { regex: /[!@#$%^&*(),.?":{}|<>]/, message: "Password must contain at least one special character." }
     ];
   
     for (let requirement of passwordRequirements) {
@@ -66,10 +67,9 @@ function SignUpPage() {
           setError("")
           login(username, password);
 
-          if (!error) {
             const from = location.state?.from || "/home";
             navigate(from, { replace: true });
-          }
+          
         } catch (error) {
           console.error("Login error:", error);
         }
@@ -114,7 +114,8 @@ function SignUpPage() {
         </div>
 
         <div className="sign-up__form-field">
-          <label className="sign-up__form-field-label" htmlFor="password">Password: </label>
+          <div>
+            <label className="sign-up__form-field-label" htmlFor="password">Password: </label>
           <input
           className="sign-up__form-field-input"
             type="password"
@@ -122,7 +123,16 @@ function SignUpPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-          />
+            onFocus={() => setShowTooltip(true)}  
+          onBlur={() => setShowTooltip(false)}  
+        />
+          </div>
+          
+        {showTooltip && (
+          <div className="sign-up__tooltip">
+            Password must be at least 8 characters long, contain both uppercase and lowercase letters, and include a number.
+          </div>
+        )}
         </div>
 
         <div className="sign-up__form-field">
