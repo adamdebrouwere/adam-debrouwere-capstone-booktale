@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthentication } from "../AuthenticationContext/AuthenticationContext";
 
-function CreateQrCode({ qrCodeUrl, setQrCodeUrl, qrCodeId, showQr }) {
+function CreateQrCode({ qrCodeUrl, setQrCodeUrl, qrCodeId, showQr, HOST_URL }) {
   const navigate = useNavigate();
   const { ORIGIN_URL } = useAuthentication();
 
@@ -19,7 +19,7 @@ function CreateQrCode({ qrCodeUrl, setQrCodeUrl, qrCodeId, showQr }) {
 
   useEffect(() => {
     if (qrCodeId) {
-      generateQrCode(`${ORIGIN_URL}/comments/${qrCodeId}`);
+      generateQrCode(`${ORIGIN_URL}/booktale/${qrCodeId}`);
     }
   }, [qrCodeId]);
 
