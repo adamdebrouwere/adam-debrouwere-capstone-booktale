@@ -6,13 +6,33 @@
   padding: 1rem 0;
 
   &__container {
-    @include flex-center;
-    padding: 0 0 1.5rem 0;
-    gap: 5rem;
+    @include flex-center(column);
+    margin: 0 0 1.5rem 0;
+    padding: 1.75rem 1rem 1.25rem 1rem;
+    border-radius: 0.5rem;
+    background-color: #fcf8f2;
+  
+    box-shadow: .125rem .125rem .3125rem .3125rem rgba(0, 0, 0, 0.1);
+    gap: 3rem;
+    transition: all 0.3s ease;
+  
+    &:hover {
+      box-shadow: .25rem .25rem .625rem .625rem rgba(0, 0, 0, 0.2);
+      transform: translateY(-0.2rem);
+    }
+  
+    &:active {
+      box-shadow: .125rem .125rem .3125rem .3125rem rgba(0, 0, 0, 0.1); 
+      transform: translateY(0.1rem); 
+    }
+
+    @include tablet {
+      @include flex-center()
+    }
   }
   &__image {
     width: 10rem;
-    box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: .125rem .125rem .3125rem .3125rem rgba(0, 0, 0, 0.3);
   }
   &__title {
     padding: 0 0 1rem 0;
