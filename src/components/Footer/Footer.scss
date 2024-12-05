@@ -8,11 +8,19 @@
   position: fixed;
   left: 0;
   bottom: 0;
-  border-radius: 1rem;
+  border-radius: 1rem 1rem 0 0;
   width: 100%;
   text-align: center;
-  transition: transform 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   z-index: 10;
+
+  @include desktop {
+    opacity: 0.5;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
 
   &.hidden {
     transform: translateY(100%);
@@ -24,7 +32,7 @@
 
   &__title {
     font-size: 1rem;
-    padding: 0.25rem 0 1rem;
+    padding: 0.25rem 0;
   }
 
   &__list {
@@ -37,7 +45,7 @@
   &__item {
     @include flex-center();
     margin: 0.25rem 0;
-    
+
     &-link {
       display: none;
       color: $color-brown-booktale;
@@ -47,15 +55,15 @@
         display: block;
       }
     }
-    
+
     &-icon {
-        width:2rem;
-        padding: 0 0.5rem 0 0;
-        @include tablet {
-            width: 2.5rem;
-        }
-      
-      
+      width: 2rem;
+      height: 2rem;
+      padding: 0 0.5rem 0 0;
+      @include tablet {
+        width: 2.5rem;
+        height: 2.5rem;
+      }
     }
   }
 
