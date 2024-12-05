@@ -36,7 +36,7 @@ function Footer() {
           >
             <img
               className="footer__item-icon"
-              src="./images/icons/email.svg"
+              src="public/images/icons/email.svg"
               alt="email icon"
             />
           </a>
@@ -57,7 +57,7 @@ function Footer() {
           >
             <img
               className="footer__item-icon"
-              src="./images/icons/linkedin.svg"
+              src="public/images/icons/linkedin.svg"
               alt="linkedIn icon"
             />
           </a>
@@ -80,7 +80,7 @@ function Footer() {
           >
             <img
               className="footer__item-icon"
-              src="./images/icons/git.svg"
+              src="public/images/icons/git.svg"
               alt="git icon"
             />
           </a>
