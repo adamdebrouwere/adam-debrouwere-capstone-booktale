@@ -117,6 +117,7 @@ export const AuthenticationProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log(response.data)
 
       setPastTales(response.data.user_books);
     } catch (error) {

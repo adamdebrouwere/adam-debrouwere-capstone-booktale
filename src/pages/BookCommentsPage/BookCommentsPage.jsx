@@ -62,6 +62,7 @@ function BookCommentPage() {
       setLoading(false);
     }
   }
+
   useEffect(() => {
     getComments(qrCodeId);
   }, [qrCodeId, BASE_URL]);
@@ -74,6 +75,7 @@ function BookCommentPage() {
       console.error("error getting book info:", error);
     }
   }
+  
   useEffect(() => {
     getBookInfo(qrCodeId);
   }, [qrCodeId, BASE_URL]);

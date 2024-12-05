@@ -6,6 +6,18 @@
     gap: 1rem;
     color: $color-dark-brown-booktale;
 
+    &__copy {
+        padding: 0 1rem;
+    }
+
+    &__container {
+        @include flex-center(column);
+        &-title{ 
+            line-height: 0.75rem;
+        }
+
+    }
+
     &__button {
         &-container {
             @include flex-center();

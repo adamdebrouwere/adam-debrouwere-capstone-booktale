@@ -5,6 +5,7 @@
 .book-comment-page {
     width: 100%;
     @include flex-center(column);
+    padding: 6rem 0 2rem;
     
     &__button-container {
         @include flex-center();

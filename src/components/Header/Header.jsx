@@ -19,7 +19,7 @@ function Header() {
         <div className="nav">
           <div className="nav__logo">
             <Link to="/" className="nav__logo-link">
-              <h1>Booktale</h1>
+              <h1 className="nav__logo-title">Booktale</h1>
             </Link>
           </div>
           <div className="nav__right-side">
@@ -37,7 +37,7 @@ function Header() {
       <div className="nav">
         <div className="nav__logo">
           <Link to="/home" className="nav__logo-link">
-            <h1>Booktale</h1>
+            <h1 className="nav__logo-title">Booktale</h1>
           </Link>
         </div>
         <div className="nav__right-side">

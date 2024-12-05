@@ -6,7 +6,7 @@ import { useAuthentication } from "../AuthenticationContext/AuthenticationContex
 
 function CreateQrCode({ qrCodeUrl, setQrCodeUrl, qrCodeId, showQr }) {
   const navigate = useNavigate();
-  const { ORIGIN_URL } = useAuthentication()
+  const { ORIGIN_URL } = useAuthentication();
 
   const generateQrCode = async (data) => {
     try {
@@ -31,7 +31,7 @@ function CreateQrCode({ qrCodeUrl, setQrCodeUrl, qrCodeId, showQr }) {
 
   function handleGoToBooktale() {
     if (qrCodeId) {
-      navigate(`/booktale/${qrCodeId}`)
+      navigate(`/booktale/${qrCodeId}`);
     }
   }
 
@@ -43,11 +43,15 @@ function CreateQrCode({ qrCodeUrl, setQrCodeUrl, qrCodeId, showQr }) {
             Print out this QR code and paste it in your book to start a
             Booktale!
           </p>
-          <img
-            className="qr-code__image"
-            src={qrCodeUrl}
-            alt="Generated QR Code"
-          />
+          <div className="qr-code__container">
+            <p className="qr-code__container-title">Booktale</p>
+            <img
+              className="qr-code__container-image"
+              src={qrCodeUrl}
+              alt="Generated QR Code"
+            />
+          </div>
+
           <div className="qr-code__button-container">
             <button className="qr-code__button" onClick={handlePrintQrCode}>
               Print QR Code

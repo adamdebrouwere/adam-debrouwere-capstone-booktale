@@ -6,7 +6,8 @@ import { useAuthentication } from "../AuthenticationContext/AuthenticationContex
 function PastTalesDisplay() {
   const { loading, setLoading, pastTales, getPastBooksData } =
     useAuthentication();
-
+  console.log(pastTales, "trig")
+  
   const navigate = useNavigate();
 
   useEffect(() => {
