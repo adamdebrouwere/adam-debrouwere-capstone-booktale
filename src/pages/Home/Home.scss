@@ -3,7 +3,7 @@
 
 .home {
     @include flex-center(column);
-    padding: 6.5rem 0.5rem;
+    padding: 6rem 0;
 
     &__create-button {
         margin: 1rem 0;

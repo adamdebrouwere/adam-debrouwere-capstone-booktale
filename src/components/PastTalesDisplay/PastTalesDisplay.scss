@@ -11,6 +11,9 @@
     padding: 1.75rem 1rem 1.75rem 1rem;
     border-radius: 0.5rem;
     background-color: #fcf8f2;
+    
+    
+    width: 18rem;
   
     box-shadow: .125rem .125rem .3125rem .3125rem rgba(0, 0, 0, 0.1);
     gap: 3rem;
@@ -29,6 +32,7 @@
     @include tablet {
       @include flex-center();
       padding: 1.75 1rem 1.25rem 1rem;
+      width:40rem;
     }
   }
   &__image {
@@ -42,8 +46,13 @@
     padding: 0 0 1rem 0;
   }
 
+  &__copy {
+    width: 60%;
+    word-wrap: break-word;
+  }
   &__comment {
     &-bold {
+      
         font-weight: 600;
     }
   }
