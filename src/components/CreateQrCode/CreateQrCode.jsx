@@ -8,7 +8,6 @@ function CreateQrCode({ qrCodeUrl, setQrCodeUrl, qrCodeId, showQr }) {
   const navigate = useNavigate();
   const { ORIGIN_URL } = useAuthentication();
 
-
   const generateQrCode = async (data) => {
     try {
       const qrCodeImageUrl = await QrCode.toDataURL(data);
