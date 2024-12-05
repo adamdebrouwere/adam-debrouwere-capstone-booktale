@@ -1,28 +1,33 @@
 @use "src/styles/partials/_mixins" as *;
 @use "src/styles/partials/variables" as *;
 
+.comments {
+  width: 100%
+}
 .comment {
-    @include flex-center(row, normal, normal);
-    max-width: 100%;
-    padding: 1rem 8rem;
-    gap: 1.5rem;
+    @include flex-center(row, space-around, center);
+    width:80%;
+    padding: 1rem 2rem;
+    margin: 0 auto;
+    gap: 10%;
     
     &__left{
       @include flex-center(column, flex-start, flex-start);
       padding: 0 2rem 0 0 
+
     }
   
 
   
     &__right {
-
-        max-width: 70%;
+        width: 50%;
         @include flex-center(row, normal, normal);
 
     }
   
     &__commentor {
       font-weight: 600;
+      font-size: 1.25rem;
       padding: 0 0 0.5rem;
     }
 

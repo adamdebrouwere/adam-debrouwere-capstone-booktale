@@ -1,4 +1,5 @@
 import { useAuthentication } from "../../components/AuthenticationContext/AuthenticationContext";
+import Footer from "../../components/Footer/Footer";
 import "./Landing.scss";
 import { useNavigate } from "react-router-dom";
 
@@ -32,6 +33,7 @@ function Landing() {
           </button>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }

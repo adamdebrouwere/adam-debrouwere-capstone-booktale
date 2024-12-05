@@ -2,7 +2,7 @@ import "./Home.scss";
 import { useNavigate } from "react-router-dom";
 import { useAuthentication } from "../../components/AuthenticationContext/AuthenticationContext";
 import PastTalesDisplay from "../../components/PastTalesDisplay/PastTalesDisplay.jsx";
-
+import Footer from "../../components/Footer/Footer.jsx";
 function Home() {
   const { loading, error, pastTales } = useAuthentication();
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ function Home() {
         CREATE A Booktale
       </button>
       {pastTales && <PastTalesDisplay />}
-      
+      <Footer />
     </div>
   );
 }
