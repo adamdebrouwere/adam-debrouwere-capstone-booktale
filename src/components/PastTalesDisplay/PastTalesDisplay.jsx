@@ -6,7 +6,8 @@ import { useAuthentication } from "../AuthenticationContext/AuthenticationContex
 function PastTalesDisplay() {
   const { loading, setLoading, pastTales, getPastBooksData } =
     useAuthentication();
-
+  console.log(pastTales, "trig")
+  
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,7 +19,7 @@ function PastTalesDisplay() {
   if (loading) {
     return <div>Loading...</div>;
   }
-  
+
   return (
     <div className="past-tales">
       <h1 className="past-tales__title">Past Tales</h1>
