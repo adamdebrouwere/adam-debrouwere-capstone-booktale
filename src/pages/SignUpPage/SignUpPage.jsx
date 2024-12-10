@@ -1,5 +1,5 @@
-import './SignUpPage.scss';
-import{ useState } from "react";
+import "./SignUpPage.scss";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuthentication } from "../../components/AuthenticationContext/AuthenticationContext";
@@ -16,19 +16,23 @@ function SignUpPage() {
 
   const { BASE_URL, login, error, setError } = useAuthentication();
 
+  useEffect(() => {
+    setError("")
+  }, [])
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     setError("");
 
     const userData = { username, email, password };
-   
+
     if (!username || !email || !password || !confirmPassword) {
       setError("All fields are required.");
       return;
     }
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    
+
     if (!emailRegex.test(email)) {
       setError("Please enter a valid email address.");
       return;
@@ -40,12 +44,18 @@ function SignUpPage() {
     }
 
     const passwordRequirements = [
-      { regex: /[a-z]/, message: "Password must contain at least one lowercase letter." },
-      { regex: /[A-Z]/, message: "Password must contain at least one uppercase letter." },
+      {
+        regex: /[a-z]/,
+        message: "Password must contain at least one lowercase letter.",
+      },
+      {
+        regex: /[A-Z]/,
+        message: "Password must contain at least one uppercase letter.",
+      },
       { regex: /\d/, message: "Password must contain at least one number." },
       // { regex: /[!@#$%^&*(),.?":{}|<>]/, message: "Password must contain at least one special character." }
     ];
-  
+
     for (let requirement of passwordRequirements) {
       if (!requirement.regex.test(password)) {
         setError(requirement.message);
@@ -64,12 +74,11 @@ function SignUpPage() {
         alert("User created successfully!");
 
         try {
-          setError("")
+          setError("");
           login(username, password);
 
-            const from = location.state?.from || "/home";
-            navigate(from, { replace: true });
-          
+          const from = location.state?.from || "/home";
+          navigate(from, { replace: true });
         } catch (error) {
           console.error("Login error:", error);
         }
@@ -85,12 +94,15 @@ function SignUpPage() {
 
   return (
     <div className="sign-up">
-
-      <form className="sign-up__form"onSubmit={handleSubmit}>      <h1 className="sign-up__title">Sign Up</h1>
+      <form className="sign-up__form" onSubmit={handleSubmit}>
+        {" "}
+        <h1 className="sign-up__title">Sign Up</h1>
         <div className="sign-up__form-field">
-          <label className="sign-up__form-field-label" htmlFor="username">Username: </label>
+          <label className="sign-up__form-field-label" htmlFor="username">
+            Username:{" "}
+          </label>
           <input
-          className="sign-up__form-field-input"
+            className="sign-up__form-field-input"
             type="text"
             id="username"
             value={username}
@@ -98,13 +110,12 @@ function SignUpPage() {
             required
           />
         </div>
-
-        <div
-        className="sign-up__form-field">
-          <label 
-          className="sign-up__form-field-label" htmlFor="email">Email: </label>
+        <div className="sign-up__form-field">
+          <label className="sign-up__form-field-label" htmlFor="email">
+            Email:{" "}
+          </label>
           <input
-          className="sign-up__form-field-input"
+            className="sign-up__form-field-input"
             type="email"
             id="email"
             value={email}
@@ -112,33 +123,39 @@ function SignUpPage() {
             required
           />
         </div>
-
         <div className="sign-up__form-field">
           <div>
-            <label className="sign-up__form-field-label" htmlFor="password">Password: </label>
-          <input
-          className="sign-up__form-field-input"
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            onFocus={() => setShowTooltip(true)}  
-          onBlur={() => setShowTooltip(false)}  
-        />
+            <label className="sign-up__form-field-label" htmlFor="password">
+              Password:{" "}
+            </label>
+            <input
+              className="sign-up__form-field-input"
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              onFocus={() => setShowTooltip(true)}
+              onBlur={() => setShowTooltip(false)}
+            />
           </div>
-          
-        {showTooltip && (
-          <div className="sign-up__tooltip">
-            Password must be at least 8 characters long, contain both uppercase and lowercase letters, and include a number.
-          </div>
-        )}
-        </div>
 
+          {showTooltip && (
+            <div className="sign-up__tooltip">
+              Password must be at least 8 characters long, contain both
+              uppercase and lowercase letters, and include a number.
+            </div>
+          )}
+        </div>
         <div className="sign-up__form-field">
-          <label className="ssign-up__form-field-label" htmlFor="confirmPassword">Confirm Password: </label>
+          <label
+            className="sign-up__form-field-label"
+            htmlFor="confirmPassword"
+          >
+            Confirm Password:{" "}
+          </label>
           <input
-          className="sign-up__form-field-input"
+            className="sign-up__form-field-input"
             type="password"
             id="confirmPassword"
             value={confirmPassword}
@@ -146,12 +163,11 @@ function SignUpPage() {
             required
           />
         </div>
-
-        <button className="sign-up__form-button"
-        type="submit">Sign Up</button>
+        {error && <div>{error}</div>}
+        <button className="sign-up__form-button" type="submit">
+          Sign Up
+        </button>
       </form>
-
-      {error && <div>{error}</div>}
     </div>
   );
 }

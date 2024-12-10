@@ -10,9 +10,9 @@ function LogInPage() {
 
   useEffect(() => {
     setError("")
-  }, [setError])
+  }, [])
 
-  const from = location.state?.from || "/home";
+  const from = location.state?.from || "/login";
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -26,7 +26,7 @@ function LogInPage() {
     }
     try {
       login(username, password);
-   
+      console.log(error)
       if (!error) {
         navigate(from);
       }
@@ -37,7 +37,6 @@ function LogInPage() {
 
   return (
     <div className="log-in-page">
-        
         <form className="form" onSubmit={handleLogin}>
           <h3 className="form__title">Login</h3>
           <input
@@ -54,6 +53,7 @@ function LogInPage() {
             placeholder="Password"
             autoComplete="current-password"
           />
+          {error && <p>{error}</p>}
           <button className="form__button" type="submit">
             Login
           </button>
@@ -63,7 +63,7 @@ function LogInPage() {
           >
             Sign Up
           </button>
-          {error && <p>{error}</p>}
+          
         </form>
     </div>
   );

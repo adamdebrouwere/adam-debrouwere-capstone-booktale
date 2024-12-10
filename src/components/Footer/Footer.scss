@@ -4,7 +4,7 @@
 .footer {
   background-color: $color-light-brown-booktale;
   color: white;
-  padding: 0.5rem;
+  padding: 0.5rem 1.5rem 0;
   position: fixed;
   left: 0;
   bottom: 0;
@@ -37,8 +37,6 @@
   &__list {
     @include flex-center(row, space-around);
     list-style-type: none;
-    padding: 0;
-    margin: 0;
   }
 
   &__item {

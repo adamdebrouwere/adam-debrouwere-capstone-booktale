@@ -93,6 +93,7 @@ export const AuthenticationProvider = ({ children }) => {
         });
 
         setUser(userResponse.data.user);
+        setError("");
         setLoading(false);
       } else {
         throw new Error("Invalid username or password ");

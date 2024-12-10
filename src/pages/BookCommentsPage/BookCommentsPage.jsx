@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { XMLParser } from "fast-xml-parser";
 import { useAuthentication } from "../../components/AuthenticationContext/AuthenticationContext.jsx";
+import Footer from '../../components/Footer/Footer.jsx';
 
 function BookCommentPage() {
   const [comments, setComments] = useState([]);
@@ -186,6 +187,7 @@ function BookCommentPage() {
         <button onClick={() => navigate("/signup", {state: { from }})}>Sign Up</button>
         </div>}
       <CommentDisplay comments={comments} />
+      {user ? "" : (<Footer/>)}
     </div>
   );
 }
