@@ -24,7 +24,7 @@ This app allows users to see where books have been, what past contributors thoug
 
 ### User Profile
 
-Travelers and used book enthusiasts alike. My initial idea for this app came from my experience traveling and swapping books in hostels and used book stores. When I pick up a used book I wonder about the story of it's past and I want to know how a book I have relinquished has affected its future readers. 
+Travelers and used book enthusiasts alike. My initial idea for this app came from my experience traveling and swapping books in hostels and used book stores. When I pick up a used book I wonder about it's past and I want to know how an old book of mine has travelled and affected its future readers. 
 
 ### Features
 
