@@ -1,6 +1,6 @@
 # Booktale
-deployed at: booktale.netlify.app
 
+Deployed at [Booktale](booktale.netlify.app)
 
 ### How To Build
 
