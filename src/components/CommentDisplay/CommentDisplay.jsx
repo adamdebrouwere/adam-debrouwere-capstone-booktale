@@ -25,9 +25,12 @@ function CommentDisplay({ comments }) {
             <div className="comment__left">
               <p className="comment__commentor">{comment.username}</p>
               <p className="comment__location">{`In ${comment.city}, ${comment.country}`}</p>
-              <p className="comment__timestamp">{` on ${formattedDate}`}</p>
+              <p className="comment__timestamp">{` on ${formattedDate}.`}</p>
               
             </div>
+
+            <div className="comment__divider"></div>
+
             <div className="comment__right">
               <p className="comment__comment">{comment.comment}</p>
             </div>

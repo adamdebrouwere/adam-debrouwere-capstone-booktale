@@ -12,7 +12,7 @@ function LogInPage() {
     setError("")
   }, [])
 
-  const from = location.state?.from || "/login";
+  const from = location.state?.from || "/home";
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -26,7 +26,6 @@ function LogInPage() {
     }
     try {
       login(username, password);
-      console.log(error)
       if (!error) {
         navigate(from);
       }
