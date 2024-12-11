@@ -1,35 +1,30 @@
-# Project Title
+# Booktale
 
-Booktale
+Deployed at [Booktale](booktale.netlify.app)
 
-## How To Build
+### How To Build
 
-### Install dependencies
+#### Install dependencies
 npm install
 
-### Start development server
+#### Start development server
 npm run dev
 
-### Build the application for production
+#### Build the application for production
 npm run build
 
-### Preview the production build
-npm run preview
-
-### Lint the project files
-npm run lint
 
 ## Overview
 
-I am creating an app that uses qr codes to create exclusive comment sections for individual books. It will include user authentication and book and comment saving. 
+This app uses qr codes to create exclusive comment sections for individual books. It includes user authentication and book and comment saving. 
 
 ### Problem Space
 
-This app allows people to see where books have been, create a conversation around a specific copy of a book, and allow users to see where their book travels after they let it fly. 
+This app allows users to see where books have been, what past contributors thought about it, and future locaitons and thoughts about a text after they give it away.
 
 ### User Profile
 
-Travelers and used book enthusiasts alike. My initial idea for this app came from my experience traveling and swapping books in hostels and used book stores. When I pick up a used book I wonder about the story of it's past and I want to know how a book I have relinquished has affected its future readers. 
+Travelers and used book enthusiasts alike. My initial idea for this app came from my experience traveling and swapping books in hostels and used book stores. When I pick up a used book I wonder about it's past and I want to know how an old book of mine has travelled and affected its future readers. 
 
 ### Features
 
@@ -39,14 +34,13 @@ Travelers and used book enthusiasts alike. My initial idea for this app came fro
 - ability to scan a qr code
 - user can see and set comments on a book qr they scan
 - user can see past books, and new comments on past books
-- header with search functionality,
 - book recommendations based on like genre (potential advertisement opportunity)
 
 ## Implementation
 
 ### Tech Stack
 
-HTML, scss, JavaScript, React, MySql, Express.
+HTML, scss, JavaScript, React, Psql, Node.js, Express.
 
 Client side: react, react router, axios, html5-qrcode, qrcode-decoder-js, psql
 
@@ -54,7 +48,7 @@ ServerSide: knex, uuid, qrcode, scrypt
 
 ### APIs
 
-- Will be using Open Library API to search books and display book information.
+- Uses Open Library API to search books and display book information.
 
 ### Sitemap
 
@@ -64,9 +58,6 @@ ServerSide: knex, uuid, qrcode, scrypt
 - past books page - users can see their past books and comments, and update comment sections for the books in their past. Potential to allow user to borrow a digital copy of a past book or purchase a new copy.
 
 ### Mockups
-### Logos
-![](public/mockups/logos1.jpg)
-![](public/mockups//logos2.jpg)
 
 ### landing page
 ![](public/mockups/Landing.jpg)
@@ -92,7 +83,7 @@ GET books data from API
 
 GET user data, comment data, qrcode data, from server
 
-POST user data, comment data, qrcode data, from server
+POST user data, comment data, qrcode data, to server
 
 PUT user data
 

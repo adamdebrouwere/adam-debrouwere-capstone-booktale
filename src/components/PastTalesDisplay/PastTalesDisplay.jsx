@@ -6,7 +6,6 @@ import { useAuthentication } from "../AuthenticationContext/AuthenticationContex
 function PastTalesDisplay() {
   const { loading, setLoading, pastTales, getPastBooksData } =
     useAuthentication();
-  console.log(pastTales, "trig")
   
   const navigate = useNavigate();
 
@@ -22,7 +21,7 @@ function PastTalesDisplay() {
 
   return (
     <div className="past-tales">
-      <h1 className="past-tales__title">Past Tales</h1>
+      <h1 className="past-tales__title">Your Booktale Library</h1>
 
       {pastTales.map((tale) => {
         const date = new Date(tale.created_at);
@@ -56,6 +55,10 @@ function PastTalesDisplay() {
               <p className="past-tales__date">
                 <span className="past-tales__date-bold">On: </span>
                 {formattedDate}
+              </p>
+              <p className="past-tales__location">
+                <span className="past-tales__location-bold">From: </span>
+                {tale.city}, {tale.country}
               </p>
             </div>
           </div>

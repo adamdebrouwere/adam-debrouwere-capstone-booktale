@@ -5,34 +5,43 @@
   width: 100%
 }
 .comment {
-    @include flex-center(row, space-around, center);
-    width:80%;
-    padding: 1rem 2rem;
+    @include flex-center(row, center, flex-start);
+    width:100%;
+    height: 100%;
+    padding: 1rem 0rem;
     margin: 0 auto;
-    gap: 10%;
+    align-items: stretch;
     
     &__left{
-      @include flex-center(column, flex-start, flex-start);
-      padding: 0 2rem 0 0 
-
+      @include flex-center(column, flex-start, flex-end);
+      padding: 0 1rem 0 0; 
+      width: 29%;
     }
   
 
   
     &__right {
-        width: 50%;
         @include flex-center(row, normal, normal);
+        flex-grow: 1;
+        padding: 0 0 0 1rem;
+        width: 70%;
+    }
 
+    &__divider {
+      @include flex-center();
+      width: 0.0625rem;
+      background-color: #dddddd;
     }
   
     &__commentor {
       font-weight: 600;
-      font-size: 1.25rem;
+      font-size: 1rem;
       padding: 0 0 0.5rem;
+      word-break: break-all;
     }
 
     &__location {
-        font-size: 0.75rem;
+        font-size: 0.6875rem;
     }
     &__comment {
       max-width: 100%;
