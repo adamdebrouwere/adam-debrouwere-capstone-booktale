@@ -45,19 +45,27 @@
   }
 
   &__copy {
-    width: 60%;
+    width: 100%;
     word-wrap: break-word;
   }
   &__comment {
+    padding: 0.25rem 0;
+    word-break: break-all;
     &-bold {
-      
         font-weight: 600;
     }
   }
 
   &__date {
+    padding: 0.25rem 0;
     &-bold {
         font-weight: 600;
+    }
+  }
+  &__location {
+    padding: 0.25rem 0;
+    &-bold {
+      font-weight: 600;
     }
   }
 }

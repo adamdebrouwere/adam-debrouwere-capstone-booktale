@@ -14,9 +14,7 @@
     @include flex-center(column);
     gap: 1rem;
     
-    &__title {
-        align-self: flex-start;
-    }
+    
     &__input {
         @include input-field;
     }

@@ -93,6 +93,7 @@ export const AuthenticationProvider = ({ children }) => {
         });
 
         setUser(userResponse.data.user);
+        setError("");
         setLoading(false);
       } else {
         throw new Error("Invalid username or password ");
@@ -117,7 +118,6 @@ export const AuthenticationProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(response.data)
 
       setPastTales(response.data.user_books);
     } catch (error) {

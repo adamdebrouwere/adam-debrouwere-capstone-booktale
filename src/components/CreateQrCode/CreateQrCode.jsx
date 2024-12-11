@@ -51,7 +51,6 @@ function CreateQrCode({ qrCodeUrl, setQrCodeUrl, qrCodeId, showQr }) {
               alt="Generated QR Code"
             />
           </div>
-
           <div className="qr-code__button-container">
             <button className="qr-code__button" onClick={handlePrintQrCode}>
               Print QR Code

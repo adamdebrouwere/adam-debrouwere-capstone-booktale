@@ -25,7 +25,6 @@ function App() {
           <Route path="/booktale/:qrCodeId" element={<BookCommentPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      <Footer/>
       </BrowserRouter>
     </AuthenticationProvider>
   );
