@@ -1,16 +1,17 @@
-import { useEffect } from 'react';
-import './LogInPage.scss'
+import { useEffect } from "react";
+import "./LogInPage.scss";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuthentication } from "../../components/AuthenticationContext/AuthenticationContext";
 
 function LogInPage() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { login, error, setError } = useAuthentication();
+  const { login, error, setError, user, } =
+    useAuthentication();
 
   useEffect(() => {
-    setError("")
-  }, [])
+    setError("");
+  }, []);
 
   const from = location.state?.from || "/home";
 
@@ -25,45 +26,44 @@ function LogInPage() {
       return;
     }
     try {
-      login(username, password);
-      if (!error) {
-        navigate(from);
-      }
+      await login(username, password);
     } catch (error) {
-      console.error("Login error:", error)
+      console.error("Login error:", error);
     }
   };
 
+  useEffect(() => {
+    if (user) {
+      navigate(from);
+    }
+  }, [user]);
+
   return (
     <div className="log-in-page">
-        <form className="form" onSubmit={handleLogin}>
-          <h3 className="form__title">Login</h3>
-          <input
-            className="form__input"
-            type="text"
-            name="username"
-            placeholder="Username"
-            autoComplete="username"
-          />
-          <input
-            className="form__input"
-            type="password"
-            name="password"
-            placeholder="Password"
-            autoComplete="current-password"
-          />
-          {error && <p>{error}</p>}
-          <button className="form__button" type="submit">
-            Login
-          </button>
-          <button
-            className="form__button"
-            onClick={() => navigate("/signup")}
-          >
-            Sign Up
-          </button>
-          
-        </form>
+      <form className="form" onSubmit={handleLogin}>
+        <h3 className="form__title">Login</h3>
+        <input
+          className="form__input"
+          type="text"
+          name="username"
+          placeholder="Username"
+          autoComplete="username"
+        />
+        <input
+          className="form__input"
+          type="password"
+          name="password"
+          placeholder="Password"
+          autoComplete="current-password"
+        />
+        {error && <p>{error}</p>}
+        <button className="form__button" type="submit">
+          Login
+        </button>
+        <button className="form__button" onClick={() => navigate("/signup")}>
+          Sign Up
+        </button>
+      </form>
     </div>
   );
 }

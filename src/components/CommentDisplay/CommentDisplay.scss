@@ -13,13 +13,12 @@
     align-items: stretch;
     
     &__left{
-      @include flex-center(column, flex-start, flex-end);
+      @include flex-center(column, flex-start, flex-start);
       padding: 0 1rem 0 0; 
       width: 29%;
     }
   
 
-  
     &__right {
         @include flex-center(row, normal, normal);
         flex-grow: 1;
@@ -42,6 +41,7 @@
 
     &__location {
         font-size: 0.6875rem;
+        word-wrap: break-word;
     }
     &__comment {
       max-width: 100%;

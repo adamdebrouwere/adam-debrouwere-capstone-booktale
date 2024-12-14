@@ -9,10 +9,10 @@ function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!loading && !user) {
-      navigate("/");
-    }
-  }, [user]);
+    if (loading === false && user === null) {
+    navigate("/");
+  }
+  },[])
 
   if (loading) {
     return <div>Loading...</div>;
@@ -35,7 +35,12 @@ function Home() {
       >
         CREATE A Booktale
       </button>
-      {pastTales && <PastTalesDisplay />}
+      {pastTales && (
+        <>
+          <h1 className="home__library-title">Your Booktale Library</h1>
+          <PastTalesDisplay />
+        </>
+      )}
       <Footer />
     </div>
   );

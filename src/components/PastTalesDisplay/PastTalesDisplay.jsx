@@ -6,7 +6,7 @@ import { useAuthentication } from "../AuthenticationContext/AuthenticationContex
 function PastTalesDisplay() {
   const { loading, setLoading, pastTales, getPastBooksData } =
     useAuthentication();
-  
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,8 +21,6 @@ function PastTalesDisplay() {
 
   return (
     <div className="past-tales">
-      <h1 className="past-tales__title">Your Booktale Library</h1>
-
       {pastTales.map((tale) => {
         const date = new Date(tale.created_at);
 
@@ -35,7 +33,7 @@ function PastTalesDisplay() {
 
         return (
           <div
-            className="past-tales__container"
+            className="past-tales__card"
             key={tale.id}
             onClick={() => navigate(`/booktale/${tale.qr_code_id}`)}
           >
@@ -44,22 +42,27 @@ function PastTalesDisplay() {
               src={tale.cover_url}
               alt={`Cover for ${tale.title}`}
             />
-            <div className="past-tales__copy">
-              <h4 className="past-tales__book-title">{tale.title}</h4>
-              <p className="past-tales__author">{tale.author}</p>
-
-              <p className="past-tales__comment">
-                <span className="past-tales__comment-bold">My thoughts: </span>
-                {tale.comment}
-              </p>
-              <p className="past-tales__date">
-                <span className="past-tales__date-bold">On: </span>
-                {formattedDate}
-              </p>
-              <p className="past-tales__location">
-                <span className="past-tales__location-bold">From: </span>
-                {tale.city}, {tale.country}
-              </p>
+            <div className="past-tales__info">
+              <div className="past-tales__title-author-container">
+                <h4 className="past-tales__book-title">{tale.title}</h4>
+                <p className="past-tales__author">{tale.author}</p>
+              </div>
+              <div className="past-tales__copy">
+                <p className="past-tales__comment">
+                  <span className="past-tales__comment-bold">
+                    My thoughts:{" "}
+                  </span>
+                  {tale.comment}
+                </p>
+                <p className="past-tales__date">
+                  <span className="past-tales__date-bold">On: </span>
+                  {formattedDate}
+                </p>
+                <p className="past-tales__location">
+                  <span className="past-tales__location-bold">From: </span>
+                  {tale.city}, {tale.country}
+                </p>
+              </div>
             </div>
           </div>
         );
