@@ -35,7 +35,7 @@ function Footer() {
             href="mailto:adamdebrouwere@hotmail.com"
           >
             <img
-              className="footer__item-icon"
+              className="footer__item-icon  footer__item-icon-mail"
               src="/images/icons/email.svg"
               alt="email icon"
             />

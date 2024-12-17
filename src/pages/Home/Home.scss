@@ -5,7 +5,7 @@
     @include flex-center(column);
     padding: 6rem 0;
 
-    &__create-button {
-        margin: 1rem 0;
+    @include desktop {
+        padding: 10rem 0;
     }
 }
