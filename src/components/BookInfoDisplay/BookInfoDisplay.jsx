@@ -26,7 +26,7 @@ function BookInfoDisplay({ bookInfo }) {
             {bookInfo.author}
           </p>
           <p className="book-info__published">
-            <label className="book-info__label">Published:</label>
+            <label className="book-info__label">Published:{" "}</label>
             {bookInfo.publish_date}
           </p>
         </div>

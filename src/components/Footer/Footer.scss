@@ -61,8 +61,15 @@
         width: 2.5rem;
         height: 2.5rem;
       }
-
+      &-mail {
+        @include tablet {
+          transform: translateY(0.2rem);
+        }
+      
     }
+    }
+
+    
   }
 
   &__item a:hover {

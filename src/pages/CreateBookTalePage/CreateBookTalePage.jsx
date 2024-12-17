@@ -127,7 +127,7 @@ const CreateBookTalePage = () => {
         />
       }
       {!showQr && (
-        <button onClick={handleCreateBooktale}>Create Booktale</button>
+        <button className="create-booktale__button" onClick={handleCreateBooktale}>Create Booktale</button>
       )}
     </div>
   );

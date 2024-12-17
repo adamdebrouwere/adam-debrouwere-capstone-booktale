@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
+// import { Navigate } from "react-router-dom";
 
 const AuthenticationContext = createContext({
   authenticated: false,
@@ -33,6 +34,7 @@ export const AuthenticationProvider = ({ children }) => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const ORIGIN_URL = import.meta.env.VITE_ORIGIN_URL;
   const token = Cookies.get("token");
+
 
   useEffect(() => {
     if (token) {
@@ -108,6 +110,7 @@ export const AuthenticationProvider = ({ children }) => {
   const logout = async () => {
     Cookies.remove("token");
     setAuthenticated(false);
+    setPastTales([])
     setUser(null);
   };
 

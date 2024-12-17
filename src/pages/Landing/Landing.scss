@@ -8,8 +8,22 @@
     gap: 3rem;
     color: $color-dark-brown-booktale;
 
+    @include desktop {
+        padding: 10rem 0 0;
+    }
+
     &__button-container {
         @include flex-center();
         gap: 1rem;
     }
+
+    &__tag-line {
+        text-align: center;
+
+        @include tablet {
+            font-size: 1.25rem;;
+        }
+    }
+
+
 }
