@@ -50,6 +50,12 @@
     }
   }
 
+  &__login-button {
+    @include tablet {
+      transform: scale(1.1);
+    }
+  }
+
   &__menu-title {
     @include tablet {
       font-size: 1.25rem;
@@ -62,7 +68,8 @@
     top: 4.25rem;
     margin: 0.5rem auto;
     padding: 1rem 1.25rem 1.25rem;
-    background-color: white;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(0.75rem);
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
     border-radius: 0.75rem;
     width: 100%;
@@ -76,6 +83,7 @@
       margin: 0;
       padding: 0;
       width: 100%;
+      opacity: 1;
     }
     &-welcome-message {
       font-size: 1.25rem;

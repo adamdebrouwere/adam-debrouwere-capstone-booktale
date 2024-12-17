@@ -26,7 +26,7 @@ function LogInPage() {
       return;
     }
     try {
-      await login(username, password);
+      login(username, password);
     } catch (error) {
       console.error("Login error:", error);
     }
@@ -41,7 +41,7 @@ function LogInPage() {
   return (
     <div className="log-in-page">
       <form className="form" onSubmit={handleLogin}>
-        <h3 className="form__title">Login</h3>
+        <h3 className="form__title">Log In</h3>
         <input
           className="form__input"
           type="text"
@@ -58,7 +58,7 @@ function LogInPage() {
         />
         {error && <p>{error}</p>}
         <button className="form__button" type="submit">
-          Login
+          Log In
         </button>
         <button className="form__button" onClick={() => navigate("/signup")}>
           Sign Up

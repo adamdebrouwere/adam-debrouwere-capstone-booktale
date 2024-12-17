@@ -44,12 +44,12 @@ function CreateQrCode({ qrCodeUrl, setQrCodeUrl, qrCodeId, showQr }) {
             Booktale!
           </p>
           <div className="qr-code__container">
-            <p className="qr-code__container-title">Booktale</p>
+            
             <img
               className="qr-code__container-image"
               src={qrCodeUrl}
               alt="Generated QR Code"
-            />
+            /><p className="qr-code__container-title">Booktale</p>
           </div>
           <div className="qr-code__button-container">
             <button className="qr-code__button" onClick={handlePrintQrCode}>

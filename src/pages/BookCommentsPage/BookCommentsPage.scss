@@ -10,6 +10,9 @@
     @include tablet {
         padding: 6rem 5rem 2rem;
     }
+    @include desktop {
+        padding: 6rem 20rem 2rem;
+    }
     
     &__button-container {
         @include flex-center();

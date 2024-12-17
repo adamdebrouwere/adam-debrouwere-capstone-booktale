@@ -110,6 +110,7 @@ export const AuthenticationProvider = ({ children }) => {
   const logout = async () => {
     Cookies.remove("token");
     setAuthenticated(false);
+    setPastTales([])
     setUser(null);
   };
 

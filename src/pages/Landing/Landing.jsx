@@ -6,7 +6,11 @@ import { useNavigate } from "react-router-dom";
 
 function Landing() {
   const navigate = useNavigate();
-  const { setUser } = useAuthentication();
+  const { setUser, user } = useAuthentication();
+
+  if (user) {
+    navigate('/home')
+  }
 
   useEffect(() => {
     setUser(null);

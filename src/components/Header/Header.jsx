@@ -27,6 +27,11 @@ function Header() {
     navigate("/create-booktale");
   }
 
+  function handleGoHome() {
+    setIsDropdownOpen(false);
+    navigate("/home");
+  }
+
   useEffect(() => {
     const handleClickOutside = (event) => {
         if (dropdownRef.current && !dropdownRef.current.contains(event.target) && !menuButtonRef.current.contains(event.target)) {
@@ -80,6 +85,14 @@ function Header() {
                   onClick={handleCreateBooktale}
                 >
                   Create Booktale
+                </button>
+              </li>
+              <li>
+                <button
+                  className="nav__dropdown-menu-item"
+                  onClick={handleGoHome}
+                >
+                  My Library
                 </button>
               </li>
               <li>

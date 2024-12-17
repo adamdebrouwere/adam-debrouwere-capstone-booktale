@@ -2,65 +2,105 @@
 @use "src/styles/partials/variables" as *;
 
 .past-tales {
-  @include flex-center(column);
   padding: 1rem 0;
-  // overflow-x: auto;
-  // scroll-snap-type: x mandatory;
-  
-  
-  @include desktop {
-    flex-flow:row nowrap;
-    justify-content: flex-start;
-    gap: 1rem;
-    // overflow-x: scroll;
-    // scroll-snap-type: x mandatory;
 
+  @include desktop {
+    padding: 3rem 0;
+  }
+
+  &__how-to {
+    padding: 0.5rem 1rem 1.5rem;
+    text-align: center;
+
+    &-copy {
+      line-height: 1.5rem;
+      font-size: 1.25rem;
+    }
+  }
+
+  &__create-booktale-button {
+    margin: 1.5rem;
+    font-size: 1.25rem;
+  }
+
+  &__carousel {
+    display: none;
+
+    @include desktop {
+      width: 99.2vw;
+      display: block;
+    }
+  }
+
+  &__list {
+    @include flex-center(column);
+    @include desktop {
+      display: none;
+    }
   }
 
   &__card {
-    @include flex-center(column);
+    @include flex-center(column, space-between);
     flex: 0 0 auto;
-    // height: 18rem;
     margin: 0 0 1.5rem 0;
     padding: 1.75rem 1rem 1.75rem 1rem;
     border-radius: 0.5rem;
-    // background-color: #fcf8f2;
+    height: 32rem;
     width: 18rem;
-    background: transparent;
-  
-    box-shadow: .125rem .125rem .3125rem .3125rem rgba(0, 0, 0, 0.1);
+    background-color: $color-medium-brown-booktale;
+    box-shadow: 0.125rem 0.125rem 0.3125rem 0.3125rem rgba(0, 0, 0, 0.3);
     gap: 3rem;
-    transition: all 0.3s ease;
-  
-    &:hover {
-      box-shadow: .25rem .25rem .625rem .625rem rgba(0, 0, 0, 0.2);
-      // transform: translateY(-0.2rem);
-      transform: scale(1.03);
-    }
-  
-    &:active {
-      box-shadow: .125rem .125rem .3125rem .3125rem rgba(0, 0, 0, 0.1); 
-      transform: translateY(0.1rem); 
+    opacity: 0;
+    transform: translateY(-1.25rem);
+    animation: fadeInUp 0.5s forwards;
+    animation-delay: 0s;
+    transition: all 0.5s ease;
+
+    @include desktop {
+      &:hover {
+        box-shadow: 0.25rem 0.25rem 0.625rem 0.625rem rgba(0, 0, 0, 0.5);
+        transform: scale(1.03);
+      }
     }
 
     @include tablet {
-      @include flex-center();
+      @include flex-center(row, flex-start);
       padding: 1.75 1rem 1.25rem 1rem;
-      width:40rem;
+      width: 40rem;
+      height: 18rem;
+    }
+
+    @include desktop {
+      @include flex-center(column, space-between);
+      flex: 0 0 auto;
+      margin: 0 0 1.5rem 0;
+      padding: 1.75rem 1rem 1.75rem 1rem;
+      border-radius: 0.5rem;
+      width: 18rem;
+      height: 35rem;
     }
   }
+
   &__image {
     width: 10rem;
-    box-shadow: .125rem .125rem .3125rem .3125rem rgba(0, 0, 0, 0.3);
+    box-shadow: 0.125rem 0.125rem 0.3125rem 0.3125rem rgba(0, 0, 0, 0.3);
+    // width: 100%;
   }
 
   &__info {
     @include flex-center(column, space-between, normal);
-    height: 100%;
+    max-height: 35%;
+    @include tablet {
+      max-height: 100%;
+    }
+    @include desktop {
+      max-height: 35%;
+    }
   }
-  &__title {
-    padding: 0 0 1rem 0;
+  &__book-title {
+    font-size: 1.125rem;
   }
+
   &__author {
     padding: 0 0 1rem 0;
   }
@@ -71,7 +111,6 @@
   }
   &__comment {
     max-width: 100%;
-    // padding: 0.25rem 0;
     margin: 0.25rem 0;
     word-break: break-word;
     overflow: hidden;
@@ -80,14 +119,14 @@
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     &-bold {
-        font-weight: 600;
+      font-weight: 600;
     }
   }
 
   &__date {
     padding: 0.25rem 0;
     &-bold {
-        font-weight: 600;
+      font-weight: 600;
     }
   }
   &__location {
@@ -95,5 +134,12 @@
     &-bold {
       font-weight: 600;
     }
+  }
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
