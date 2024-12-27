@@ -187,7 +187,6 @@ function BookCommentPage() {
         <button onClick={() => navigate("/signup", {state: { from }})}>Sign Up</button>
         </div>}
       <CommentDisplay comments={comments} />
-      {user ? "" : (<Footer/>)}
     </div>
   );
 }
