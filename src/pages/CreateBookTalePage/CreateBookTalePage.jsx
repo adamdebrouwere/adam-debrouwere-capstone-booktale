@@ -1,7 +1,6 @@
 import "./CreateBookTalePage.scss";
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import BookInfoDisplay from "../../components/BookInfoDisplay/BookInfoDisplay.jsx";
 import BookSearch from "../../components/BookSearch/BookSearch.jsx";
 import CreateQrCode from "../../components/CreateQrCode/CreateQrCode.jsx";
@@ -14,10 +13,8 @@ const CreateBookTalePage = () => {
   const [qrCodeId, setQrCodeId] = useState("");
   const [qrCodeUrl, setQrCodeUrl] = useState("");
   const [showQr, setShowQr] = useState(false);
-  const { BASE_URL, error, loading, setError, setLoading, token } =
+  const { BASE_URL, error, setError, setLoading, token } =
     useAuthentication();
-
-  const navigate = useNavigate();
 
   const fetchBookInfo = async (e) => {
     e.preventDefault();
@@ -79,7 +76,7 @@ const CreateBookTalePage = () => {
       const { title, author, publish_date, cover_url } = bookInfo;
 
       await axios.post(
-        `${BASE_URL}/booktale`,
+        `${BASE_URL}/user/booktale`,
         {
           title,
           author,

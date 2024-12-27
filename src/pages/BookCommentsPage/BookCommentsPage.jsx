@@ -7,23 +7,22 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { XMLParser } from "fast-xml-parser";
 import { useAuthentication } from "../../components/AuthenticationContext/AuthenticationContext.jsx";
-import Footer from '../../components/Footer/Footer.jsx';
 
 function BookCommentPage() {
-  const [comments, setComments] = useState([]);
-  const [bookInfo, setBookInfo] = useState("");
+  const [taleInfo, setTaleInfo] = useState([]);
+  const [comments, setComments] = useState([])
   const [comment, setComment] = useState("");
   const { qrCodeId } = useParams();
 
-  const { BASE_URL, setUser, user, error, setError, loading, setLoading, token } = useAuthentication()
+  const { BASE_URL, setUser, user, setError, loading, setLoading, token } = useAuthentication()
   
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from || `/booktale/${qrCodeId}`;
+  const from = location.state?.from || `/Booktale/${qrCodeId}`;
 
 
   useEffect(() => {
-    if (token) {
+    if (token && user) {
       const getUserData = async () => {
         try {
           const response = await axios.get(`${BASE_URL}/user`, {
@@ -44,13 +43,12 @@ function BookCommentPage() {
     } else {
       setLoading(false);
     }
-  }, [BASE_URL, token]);
+  }, [token]);
 
   async function getComments(id) {
     try {
       if (id) {
-        const response = await axios.get(`${BASE_URL}/booktale/${id}`);
-
+        const response = await axios.get(`${BASE_URL}/tales/${id}`);
         setComments(response.data.comments);
       } else {
         setComments([]);
@@ -66,20 +64,20 @@ function BookCommentPage() {
 
   useEffect(() => {
     getComments(qrCodeId);
-  }, [qrCodeId, BASE_URL]);
+  }, [qrCodeId]);
 
-  async function getBookInfo() {
+  async function getTaleInfo() {
     try {
-      const response = await axios.get(`${BASE_URL}/bookInfo/${qrCodeId}`);
-      setBookInfo(response.data.getBookInfo);
+      const response = await axios.get(`${BASE_URL}/tales/${qrCodeId}`);
+      setTaleInfo(response.data.bookInfo[0]);
     } catch (error) {
       console.error("error getting book info:", error);
     }
   }
   
   useEffect(() => {
-    getBookInfo(qrCodeId);
-  }, [qrCodeId, BASE_URL]);
+    getTaleInfo(qrCodeId);
+  }, [qrCodeId]);
 
   async function postComment(id, newComment) {
     try {
@@ -132,7 +130,7 @@ function BookCommentPage() {
       const location = parsedCordToText.reversegeocode.addressparts;
 
       await axios.post(
-        `${BASE_URL}/booktale/${id}`,
+        `${BASE_URL}/user/${id}`,
         {
           comment: newComment,
           username: user.username,
@@ -177,7 +175,7 @@ function BookCommentPage() {
 
   return (
     <div className="book-comment-page">
-      <BookInfoDisplay bookInfo={bookInfo} />
+      <BookInfoDisplay bookInfo={taleInfo} />
       {user ? (<CommentCreator
         handleSubmitComment={handleSubmitComment}
         setComment={setComment}
