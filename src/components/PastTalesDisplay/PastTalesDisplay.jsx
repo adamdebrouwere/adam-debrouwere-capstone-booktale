@@ -31,7 +31,7 @@ function PastTalesDisplay() {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setHowToVisible(true);
-    }, 300);
+    }, 350);
 
     return () => clearTimeout(timeout);
   }, []);
@@ -40,7 +40,7 @@ function PastTalesDisplay() {
   return (
     
     <div className="past-tales">
-      {!loading && pastTales.length <= 0 && howToVisible && (
+      {!loading && pastTales.length === 0 && howToVisible && (
         <div className="past-tales__how-to">
           <p className="past-tales__how-to-copy">
         Add to your library by creating a Booktale or by scanning a Booktale QR code. 
@@ -70,7 +70,7 @@ function PastTalesDisplay() {
               <div
               className={`past-tales__card ${isItemsVisible ? "show" : ""}`}
               key={tale.id}
-              style={{ animationDelay: `${index * 0.3}s` }}
+              style={{ animationDelay: `${index * 0.25}s` }}
               onClick={() => navigate(`/booktale/${tale.qr_code_id}`)}
             >
                 <img
@@ -121,7 +121,7 @@ function PastTalesDisplay() {
               <div
               className={`past-tales__card ${isItemsVisible ? "show" : ""}`}
               key={tale.id}
-              style={{ animationDelay: `${index * 0.4}s` }}
+              style={{ animationDelay: `${index * 0.25}s` }}
               onClick={() => navigate(`/booktale/${tale.qr_code_id}`)}
             >
                 <img
