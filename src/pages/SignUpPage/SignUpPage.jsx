@@ -64,7 +64,7 @@ function SignUpPage() {
     }
 
     try {
-      const response = await axios.post(`${BASE_URL}/signup`, userData, {
+      const response = await axios.post(`${BASE_URL}/auth/signup`, userData, {
         headers: {
           "Content-Type": "application/json",
         },

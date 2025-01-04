@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-// import { Navigate } from "react-router-dom";
 
 const AuthenticationContext = createContext({
   authenticated: false,
@@ -41,7 +40,7 @@ export const AuthenticationProvider = ({ children }) => {
       const authCheck = async () => {
         setLoading(true);
         try {
-          const response = await axios.get(`${BASE_URL}/authenticated`, {
+          const response = await axios.get(`${BASE_URL}/auth/authenticated`, {
             headers: { Authorization: `Bearer ${token}` },
           });
 
@@ -77,7 +76,7 @@ export const AuthenticationProvider = ({ children }) => {
   const login = async (username, password) => {
     try {
       setLoading(true);
-      const response = await axios.post(`${BASE_URL}/login`, {
+      const response = await axios.post(`${BASE_URL}/auth/login`, {
         username,
         password,
       });
@@ -116,12 +115,11 @@ export const AuthenticationProvider = ({ children }) => {
 
   const getPastBooksData = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/pastTales/${user.id}`, {
+      const response = await axios.get(`${BASE_URL}/user/${user.id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-
       setPastTales(response.data.user_books);
     } catch (error) {
       setError(`Error fetching book data: ${error}`);
