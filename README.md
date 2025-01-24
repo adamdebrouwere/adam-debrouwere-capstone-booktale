@@ -1,7 +1,7 @@
 # Booktale
 
 Deployed at [Booktale](https://booktale.netlify.app)
-You can find the server [here](https://github.com/adamdebrouwere/adam-debrouwere-capstone-booktale-serve)
+You can find the server [here](https://github.com/adamdebrouwere/adam-debrouwere-capstone-booktale-server).
 
 ### How To Build
 
