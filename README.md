@@ -12,11 +12,11 @@ Deployed at [Booktale](booktale.netlify.app)
 
 ## Overview
 
-This app allows users to to create, comment on, and collect QR codes linked to books. It includes robust user authentication and book and comment saving. 
+This app allows users to to create, comment on, and collect QR codes linked to books. It includes robust user authentication, book and comment saving, and geolocation. 
 
 ### Problem Space
 
-This app emables users to see where books have been, what past contributors thought about it, and future locaitons and thoughts about a text after they give it away.
+This app enables users to see where books have been, what past contributors thought about it, and future locaitons and thoughts about a text after they give it away.
 
 ### User Profile
 
