@@ -4,7 +4,7 @@ import axios from "axios";
 import BookInfoDisplay from "../../components/BookInfoDisplay/BookInfoDisplay.jsx";
 import BookSearch from "../../components/BookSearch/BookSearch.jsx";
 import CreateQrCode from "../../components/CreateQrCode/CreateQrCode.jsx";
-import { useAuthentication } from "../../components/AuthenticationContext/AuthenticationContext.jsx";
+import { useAuthenticationContext } from "../../context/AuthenticationContext.jsx";
 import { v4 as uuidv4 } from "uuid";
 
 const CreateBookTalePage = () => {
@@ -14,7 +14,7 @@ const CreateBookTalePage = () => {
   const [qrCodeUrl, setQrCodeUrl] = useState("");
   const [showQr, setShowQr] = useState(false);
   const { BASE_URL, error, setError, setLoading, token } =
-    useAuthentication();
+    useAuthenticationContext();
 
   const fetchBookInfo = async (e) => {
     e.preventDefault();

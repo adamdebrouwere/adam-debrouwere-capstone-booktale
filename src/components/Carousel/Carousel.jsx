@@ -2,6 +2,7 @@ import React, { useRef } from 'react'
 import './Carousel.scss'
 import { usePosition } from "../../hooks/usePosition";
 import { ArrowLeft, ArrowRight } from "../Aarow/Arrow.jsx";
+import PropTypes from 'prop-types';
 
 function Carousel({ children }) {
     const ref = useRef();
@@ -37,3 +38,7 @@ function Carousel({ children }) {
     );
   }
 export default Carousel
+
+Carousel.propTypes = {
+  children: PropTypes.node.isRequired,
+};

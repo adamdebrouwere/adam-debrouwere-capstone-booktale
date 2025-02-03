@@ -1,4 +1,5 @@
 import './CommentCreator.scss'
+import PropTypes from 'prop-types'
 
 function CommentCreator({ handleSubmitComment, setComment, comment }) {
   return (
@@ -6,6 +7,7 @@ function CommentCreator({ handleSubmitComment, setComment, comment }) {
       <h2 className="comment-creator__title">Leave Your Tale Behind</h2>
       <p className="comment-creator__instructions">You must leave a message to save this Booktale in your library.</p>
       <textarea
+      id="comment-input"
         className="comment-creator__input"
         placeholder="Share here!"
         value={comment}
@@ -17,3 +19,9 @@ function CommentCreator({ handleSubmitComment, setComment, comment }) {
 }
 
 export default CommentCreator;
+
+CommentCreator.propTypes = {
+  handleSubmitComment: PropTypes.func.isRequired,
+  setComment: PropTypes.func.isRequired,
+  comment: PropTypes.string.isRequired,
+};

@@ -2,7 +2,7 @@ import "./SignUpPage.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useAuthentication } from "../../components/AuthenticationContext/AuthenticationContext";
+import { useAuthenticationContext } from "../../context/AuthenticationContext";
 
 function SignUpPage() {
   const [username, setUsername] = useState("");
@@ -14,11 +14,11 @@ function SignUpPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { BASE_URL, login, error, setError } = useAuthentication();
+  const { BASE_URL, login, error, setError } = useAuthenticationContext();
 
   useEffect(() => {
     setError("")
-  }, [])
+  }, [setError])
 
   const handleSubmit = async (e) => {
     e.preventDefault();

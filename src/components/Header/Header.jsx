@@ -1,13 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./Header.scss";
-import { useAuthentication } from "../AuthenticationContext/AuthenticationContext";
+import { useAuthenticationContext } from "../../context/AuthenticationContext"
 import { useState, useEffect, useRef } from "react";
 
 function Header() {
   const navigate = useNavigate();
   const dropdownRef = useRef(null)
   const menuButtonRef = useRef(null)
-  const { user, logout } = useAuthentication();
+  const { user, logout } = useAuthenticationContext();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);  
 
   const toggleDropdown = () => {

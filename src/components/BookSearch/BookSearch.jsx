@@ -1,4 +1,5 @@
 import "./BookSearch.scss";
+import PropTypes from "prop-types"
 
 function BookSearch({ searchQuery, setSearchQuery, fetchBookInfo }) {
   return (
@@ -19,3 +20,9 @@ function BookSearch({ searchQuery, setSearchQuery, fetchBookInfo }) {
 }
 
 export default BookSearch;
+
+BookSearch.propTypes = {
+  searchQuery: PropTypes.string.isRequired,
+  setSearchQuery: PropTypes.func.isRequired,
+  fetchBookInfo: PropTypes.func.isRequired,
+};

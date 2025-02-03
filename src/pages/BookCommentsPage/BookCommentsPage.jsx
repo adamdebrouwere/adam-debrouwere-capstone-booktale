@@ -1,4 +1,4 @@
-import './BookCommentsPage.scss'
+import "./BookCommentsPage.scss";
 import CommentCreator from "../../components/CommentCreator/CommentCreator.jsx";
 import CommentDisplay from "../../components/CommentDisplay/CommentDisplay.jsx";
 import BookInfoDisplay from "../../components/BookInfoDisplay/BookInfoDisplay.jsx";
@@ -6,20 +6,30 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { XMLParser } from "fast-xml-parser";
-import { useAuthentication } from "../../components/AuthenticationContext/AuthenticationContext.jsx";
+import { useAuthenticationContext } from "../../context/AuthenticationContext.jsx";
 
 function BookCommentPage() {
   const [taleInfo, setTaleInfo] = useState([]);
-  const [comments, setComments] = useState([])
+  const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
   const { qrCodeId } = useParams();
 
-  const { BASE_URL, setUser, user, setError, loading, setLoading, token } = useAuthentication()
-  
+  // console.log(taleInfo)
+
+  const {
+    BASE_URL,
+    setUser,
+    user,
+    error,
+    setError,
+    loading,
+    setLoading,
+    token,
+  } = useAuthenticationContext();
+
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from || `/Booktale/${qrCodeId}`;
-
 
   useEffect(() => {
     if (token && user) {
@@ -43,41 +53,44 @@ function BookCommentPage() {
     } else {
       setLoading(false);
     }
-  }, [token]);
+  }, [token, BASE_URL, user, setUser, setError, setLoading]);
 
-  async function getComments(id) {
-    try {
-      if (id) {
-        const response = await axios.get(`${BASE_URL}/tales/${id}`);
-        setComments(response.data.comments);
-      } else {
-        setComments([]);
-        console.error("Can't get comments", error);
+  useEffect(() => {
+    const getComments = async (id) => {
+      try {
+        if (id) {
+          const response = await axios.get(`${BASE_URL}/tales/${id}`);
+          setComments(response.data.comments);
+        } else {
+          setComments([]);
+          console.error("Can't get comments", error);
+        }
+      } catch (error) {
+        setError("Can't fetch comments. Please try again later.");
+        console.error(error);
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      setError("Can't fetch comments. Please try again later.");
-      console.error(error);
-    } finally {
-      setLoading(false);
     }
-  }
+    if (qrCodeId) {
+      getComments(qrCodeId);
+    }
+  }, [BASE_URL, error, qrCodeId, setError, setLoading]);
 
   useEffect(() => {
-    getComments(qrCodeId);
-  }, [qrCodeId]);
-
-  async function getTaleInfo() {
-    try {
-      const response = await axios.get(`${BASE_URL}/tales/${qrCodeId}`);
-      setTaleInfo(response.data.bookInfo[0]);
-    } catch (error) {
-      console.error("error getting book info:", error);
+    const getTaleInfo = async (id) => {
+      try {
+        const response = await axios.get(`${BASE_URL}/tales/${id}`);
+        setTaleInfo(response.data.bookInfo[0]);
+      } catch (error) {
+        console.error("error getting book info:", error);
+      }
     }
-  }
-  
-  useEffect(() => {
-    getTaleInfo(qrCodeId);
-  }, [qrCodeId]);
+
+    if (qrCodeId) {
+      getTaleInfo(qrCodeId);
+    }
+  }, [BASE_URL, qrCodeId]);
 
   async function postComment(id, newComment) {
     try {
@@ -86,17 +99,16 @@ function BookCommentPage() {
         return;
       }
 
-      
       if (comments.some((userComment) => userComment.user_id === user.id)) {
         alert(
           "You have already commented. Scan another qr or create your own!"
         );
         return;
       }
-      
+
       if (!comment) {
-        alert("You must input something to commment.")
-        return
+        alert("You must input something to commment.");
+        return;
       }
 
       const position = await new Promise((resolve, reject) => {
@@ -150,7 +162,7 @@ function BookCommentPage() {
         }
       );
 
-      getComments(id);
+      // getComments(id);
       setComment("");
     } catch (error) {
       console.error("Error posting comment:", error);
@@ -164,9 +176,9 @@ function BookCommentPage() {
       setError("You must be logged in to comment");
       return;
     }
-    
+
     postComment(qrCodeId, comment);
-    setComment("")
+    setComment("");
   };
 
   if (loading) {
@@ -176,14 +188,22 @@ function BookCommentPage() {
   return (
     <div className="book-comment-page">
       <BookInfoDisplay bookInfo={taleInfo} />
-      {user ? (<CommentCreator
-        handleSubmitComment={handleSubmitComment}
-        setComment={setComment}
-        comment={comment}
-      />) : <div className="book-comment-page__button-container">
-        <button onClick={() => navigate("/login", {state: { from }})}>Log In</button>
-        <button onClick={() => navigate("/signup", {state: { from }})}>Sign Up</button>
-        </div>}
+      {user ? (
+        <CommentCreator
+          handleSubmitComment={handleSubmitComment}
+          setComment={setComment}
+          comment={comment}
+        />
+      ) : (
+        <div className="book-comment-page__button-container">
+          <button onClick={() => navigate("/login", { state: { from } })}>
+            Log In
+          </button>
+          <button onClick={() => navigate("/signup", { state: { from } })}>
+            Sign Up
+          </button>
+        </div>
+      )}
       <CommentDisplay comments={comments} />
     </div>
   );

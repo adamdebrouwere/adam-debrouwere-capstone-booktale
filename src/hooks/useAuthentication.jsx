@@ -1,39 +1,15 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
-import axios from "axios";
-import Cookies from "js-cookie";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import { BASE_URL, ORIGIN_URL } from '../constants';
 
-const AuthenticationContext = createContext({
-  authenticated: false,
-  setUser: () => {},
-  user: null,
-  login: () => {},
-  logout: () => {},
-  setLoading: () => {},
-  loading: false,
-  setError: () => {},
-  error: null,
-  BASE_URL: "",
-  ORIGIN_URL: "",
-  token: "",
-  getPastBooksData: () => {},
-  pastTales: null,
-  setPastTales: () => {},
-});
-
-export const useAuthentication = () => {
-  return useContext(AuthenticationContext);
-};
-
-export const AuthenticationProvider = ({ children }) => {
+const useAuthentication = () => {
   const [authenticated, setAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const [pastTales, setPastTales] = useState([]);
-  const BASE_URL = import.meta.env.VITE_BASE_URL;
-  const ORIGIN_URL = import.meta.env.VITE_ORIGIN_URL;
   const token = Cookies.get("token");
-
 
   useEffect(() => {
     if (token) {
@@ -44,12 +20,8 @@ export const AuthenticationProvider = ({ children }) => {
             headers: { Authorization: `Bearer ${token}` },
           });
 
-          if (
-            response.status === 200 &&
-            response.data.message === "User Authenticated"
-          ) {
+          if (response.status === 200 && response.data.message === "User Authenticated") {
             setAuthenticated(true);
-
             const userResponse = await axios.get(`${BASE_URL}/user`, {
               headers: { Authorization: `Bearer ${token}` },
             });
@@ -66,7 +38,6 @@ export const AuthenticationProvider = ({ children }) => {
         }
       };
 
-      setLoading(true);
       authCheck();
     } else {
       setAuthenticated(false);
@@ -84,24 +55,22 @@ export const AuthenticationProvider = ({ children }) => {
       if (response.data.token) {
         Cookies.set("token", response.data.token, {
           expires: 7,
-          secure: process.env.NODE_ENV === "production",
-          SameSite: "Strict",
+          secure: import.meta.env.MODE === "production",
+          sameSite: "Strict",
         });
         setAuthenticated(true);
-
         const userResponse = await axios.get(`${BASE_URL}/user`, {
           headers: { Authorization: `Bearer ${response.data.token}` },
         });
-
         setUser(userResponse.data.user);
         setError("");
-        setLoading(false);
       } else {
-        throw new Error("Invalid username or password ");
+        throw new Error("Invalid username or password");
       }
     } catch (err) {
       console.error("Error logging in:", err);
       setError("Login failed. Please check your username or password.");
+    } finally {
       setLoading(false);
     }
   };
@@ -109,7 +78,7 @@ export const AuthenticationProvider = ({ children }) => {
   const logout = async () => {
     Cookies.remove("token");
     setAuthenticated(false);
-    setPastTales([])
+    setPastTales([]);
     setUser(null);
   };
 
@@ -128,27 +97,23 @@ export const AuthenticationProvider = ({ children }) => {
     }
   };
 
-
-  return (
-    <AuthenticationContext.Provider
-      value={{
-        authenticated,
-        user,
-        setUser,
-        login,
-        logout,
-        loading,
-        setLoading,
-        error,
-        setError,
-        BASE_URL,
-        ORIGIN_URL,
-        token,
-        getPastBooksData,
-        pastTales,
-      }}
-    >
-      {children}
-    </AuthenticationContext.Provider>
-  );
+  return {
+    authenticated,
+    user,
+    setUser,
+    login,
+    logout,
+    loading,
+    setLoading,
+    error,
+    setError,
+    BASE_URL,
+    ORIGIN_URL,
+    token,
+    getPastBooksData,
+    pastTales,
+    setPastTales,
+  };
 };
+
+export default useAuthentication;
