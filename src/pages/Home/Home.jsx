@@ -1,11 +1,11 @@
 import "./Home.scss";
 import { useNavigate } from "react-router-dom";
-import { useAuthentication } from "../../components/AuthenticationContext/AuthenticationContext";
+import { useAuthenticationContext } from "../../context/AuthenticationContext.jsx";
 import PastTalesDisplay from "../../components/PastTalesDisplay/PastTalesDisplay.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
 
 function Home() {
-  const { loading, error, user } = useAuthentication();
+  const { loading, error, user } = useAuthenticationContext();
   const navigate = useNavigate();
 
   if (!loading && !user) {

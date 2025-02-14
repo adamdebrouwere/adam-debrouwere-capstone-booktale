@@ -1,13 +1,14 @@
-import React from "react";
-import { useAuthentication } from "../AuthenticationContext/AuthenticationContext";
+import{ useAuthenticationContext } from "../../context/AuthenticationContext";
 import "./BookInfoDisplay.scss";
+import PropTypes from 'prop-types'
 
 function BookInfoDisplay({ bookInfo }) {
-  const { loading } = useAuthentication();
+  const { loading } = useAuthenticationContext();
 
   if (loading) {
     return <div>Loading...</div>;
   }
+
 
   return (
     <div className="book-info">
@@ -22,11 +23,11 @@ function BookInfoDisplay({ bookInfo }) {
           )}
           <h2 className="book-info__title">{bookInfo.title}</h2>
           <p className="book-info__author">
-            <label className="book-info__label">Author: </label>
+            <span className="book-info__label">Author: </span>
             {bookInfo.author}
           </p>
           <p className="book-info__published">
-            <label className="book-info__label">Published:{" "}</label>
+            <span className="book-info__label">Published:{" "}</span>
             {bookInfo.publish_date}
           </p>
         </div>
@@ -34,5 +35,16 @@ function BookInfoDisplay({ bookInfo }) {
     </div>
   );
 }
+
+BookInfoDisplay.propTypes = {
+  bookInfo: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    publish_date: PropTypes.string.isRequired,
+    cover_url: PropTypes.string.isRequired,
+    created_at: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default BookInfoDisplay;

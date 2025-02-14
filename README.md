@@ -1,26 +1,22 @@
 # Booktale
 
-Deployed at [Booktale](booktale.netlify.app)
+Deployed at [Booktale](https://booktale.netlify.app)
 
 ### How To Build
 
 #### Install dependencies
-npm install
+```npm install```
 
 #### Start development server
-npm run dev
-
-#### Build the application for production
-npm run build
-
+```npm run dev```
 
 ## Overview
 
-This app uses qr codes to create exclusive comment sections for individual books. It includes user authentication and book and comment saving. 
+This app allows users to to create, comment on, and collect QR codes linked to books. It includes robust user authentication, book and comment saving, and geolocation. 
 
 ### Problem Space
 
-This app allows users to see where books have been, what past contributors thought about it, and future locaitons and thoughts about a text after they give it away.
+This app enables users to see where books have been, what past contributors thought about it, and future locaitons and thoughts about a text after they give it away.
 
 ### User Profile
 
@@ -28,23 +24,21 @@ Travelers and used book enthusiasts alike. My initial idea for this app came fro
 
 ### Features
 
-- user account create/login with past books and comments saved 
-- user home page displaying recent activity of past books;
-- user can create a new qr for a book
-- ability to scan a qr code
-- user can see and set comments on a book qr they scan
-- user can see past books, and new comments on past books
-- book recommendations based on like genre (potential advertisement opportunity)
+- User account create/login with past books and comments saved 
+- User home page displaying recent activity of past books;
+- User can create a new qr for a book
+- User can see and set comments on a QR code they scan
+- User can see past books, and new comments on past books.
 
 ## Implementation
 
 ### Tech Stack
 
-HTML, scss, JavaScript, React, Psql, Node.js, Express.
+HTML5, SCSS, JavaScript, React, PostgreSQL, Node.js, Express, JWT's.
 
 Client side: react, react router, axios, html5-qrcode, qrcode-decoder-js, psql
 
-ServerSide: knex, uuid, qrcode, scrypt
+Server Side: knex, uuid, qrcode, scrypt
 
 ### APIs
 
@@ -52,10 +46,10 @@ ServerSide: knex, uuid, qrcode, scrypt
 
 ### Sitemap
 
-- comments - anyone who scans can see the comments
-- Log in or create account - if user wants to save books and comment
-- create a new BookTale qr page 
-- past books page - users can see their past books and comments, and update comment sections for the books in their past. Potential to allow user to borrow a digital copy of a past book or purchase a new copy.
+- Comments - anyone who scans a Booktale QR can see the comments.
+- Log in or create account - if user wants to save books and comment.
+- Create a new Booktale QR.
+- Past books page - users can see their past books and comments, and new comments made on their past books.
 
 ### Mockups
 
@@ -99,6 +93,7 @@ Sprint 3 -  style for all sizes - deploy
 
 ## Future Implementations
 
-- connect to google books api to use google to authenticate users. 
-- ability to put up books for trade with other users. 
-- track friends booktale progress (follow)
+- Connect to google books api to use google to authenticate users. 
+- Ability to put up books for trade with other users. 
+- Track friends booktale progress (follow)
+- Book recommendations based on like genre (potential advertisement opportunity)

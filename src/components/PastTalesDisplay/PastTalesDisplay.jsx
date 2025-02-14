@@ -1,12 +1,12 @@
 import "./PastTalesDisplay.scss";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuthentication } from "../AuthenticationContext/AuthenticationContext";
+import { useAuthenticationContext } from "../../context/AuthenticationContext";
 import Carousel from "../Carousel/Carousel";
 
 function PastTalesDisplay() {
   const { loading, setLoading, pastTales, getPastBooksData } =
-    useAuthentication();
+    useAuthenticationContext();
   const [isItemsVisible, setIsItemsVisible] = useState(false);
   const [howToVisible, setHowToVisible] = useState(false)
 
@@ -16,12 +16,9 @@ function PastTalesDisplay() {
     setLoading(true);
     getPastBooksData();
     setLoading(false);
-  }, []);
+  }, [getPastBooksData, setLoading]);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
+ 
   useEffect(() => {
     if (pastTales.length > 0) {
       setIsItemsVisible(true);
@@ -35,7 +32,11 @@ function PastTalesDisplay() {
 
     return () => clearTimeout(timeout);
   }, []);
-  
+
+   if (loading) {
+    return <div>Loading...</div>;
+  }
+
 
   return (
     

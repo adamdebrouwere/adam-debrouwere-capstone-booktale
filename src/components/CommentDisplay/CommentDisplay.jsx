@@ -1,4 +1,6 @@
 import "./CommentDisplay.scss";
+import PropTypes from 'prop-types';
+
 
 function CommentDisplay({ comments }) {
   if (!comments) {
@@ -42,3 +44,7 @@ function CommentDisplay({ comments }) {
 }
 
 export default CommentDisplay;
+
+CommentDisplay.propTypes = {
+  comments: PropTypes.array.isRequired,
+};

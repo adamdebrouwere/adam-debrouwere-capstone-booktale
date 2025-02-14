@@ -1,17 +1,17 @@
 import { useEffect } from "react";
 import "./LogInPage.scss";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useAuthentication } from "../../components/AuthenticationContext/AuthenticationContext";
+import { useAuthenticationContext } from "../../context/AuthenticationContext";
 
 function LogInPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const { login, error, setError, user, } =
-    useAuthentication();
+    useAuthenticationContext();
 
   useEffect(() => {
     setError("");
-  }, []);
+  }, [setError]);
 
   const from = location.state?.from || "/home";
 
@@ -36,7 +36,7 @@ function LogInPage() {
     if (user) {
       navigate(from);
     }
-  }, [user]);
+  },);
 
   return (
     <div className="log-in-page">
